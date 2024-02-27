@@ -306,3 +306,13 @@ export const JsonDataComponent = () => <div>{data.description}</div>;
 ```
 
 Checkout the [official Rollup plugin list](https://github.com/rollup/plugins) for additional helpful plugins.
+
+
+
+How to link to local repo for testing
+- npm i -g yalc
+- npm run build
+- cd build
+- yalc publish (or yalc update)
+- cd to the repo you want to install in
+- yalc add <PACKAGE_NAME>
