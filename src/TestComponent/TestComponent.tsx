@@ -1,9 +1,6 @@
 import React from "react";
-
 import { TestComponentProps } from "./TestComponent.types";
-
 import "./TestComponent.css";
-import { Button } from "@mui/material";
 
 const TestComponent: React.FC<TestComponentProps> = ({ heading, content }) => (
   <div data-testid="test-component" className="test-component">
@@ -11,12 +8,6 @@ const TestComponent: React.FC<TestComponentProps> = ({ heading, content }) => (
       {heading}
     </h1>
     <div data-testid="test-component__content">{content}</div>
-    <Button
-      variant="contained"
-      onClick={() => {}}
-    >
-      HELLOxx
-    </Button>
   </div>
 );
 

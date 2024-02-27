@@ -21,3 +21,131 @@
   }
 }
 
+/* @font-face {
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-Black.ttf') format('truetype');
+} */
+/* @font-face {
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-BlackItalic.ttf') format('truetype');
+} */
+
+/* @font-face {
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-ExtraBold.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-ExtraBoldItalic.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-Italic.ttf') format('truetype');
+} */
+
+/* @font-face {
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-LightItalic.ttf') format('truetype');
+} */
+
+/* regular */
+@font-face {
+  /* font-family: 'RedHatDisplay-Regular'; */
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  /* font-family: 'RedHatDisplay-Regular'; */
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* medium */
+@font-face {
+  /* font-family: 'RedHatDisplay-Medium'; */
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  /* font-family: 'RedHatDisplay-Medium'; */
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* semi-bold */
+@font-face {
+  /* font-family: 'RedHatDisplay-SemiBold'; */
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  /* font-family: 'RedHatDisplay-SemiBold'; */
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* bold */
+@font-face {
+  /* font-family: 'RedHatDisplay-Bold'; */
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  /* font-family: 'RedHatDisplay-Bold'; */
+  font-family: 'RedHatDisplay';
+  src: url('./theme/Red_Hat_Display/static/RedHatDisplay-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+
+
+/* regular */
+@font-face {
+  /* font-family: 'RedHatDisplay-Regular'; */
+  font-family: 'Nunito';
+  src: url('./theme/Tsukimi_Rounded/TsukimiRounded-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  /* font-family: 'RedHatDisplay-Regular'; */
+  font-family: 'Nunito';
+  src: url('./theme/Tsukimi_Rounded/TsukimiRounded-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+/* bold */
+@font-face {
+  /* font-family: 'RedHatDisplay-Bold'; */
+  font-family: 'Nunito';
+  src: url('./theme/Tsukimi_Rounded/TsukimiRounded-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  /* font-family: 'RedHatDisplay-Bold'; */
+  font-family: 'Nunito';
+  src: url('./theme/Tsukimi_Rounded/TsukimiRounded-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}

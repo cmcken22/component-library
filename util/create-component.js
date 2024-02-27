@@ -13,6 +13,7 @@ console.log("Creating Component Templates with name: " + componentName);
 
 const componentDirectory = `./src/${componentName}`;
 
+
 if (fs.existsSync(componentDirectory)) {
   console.error(`Component ${componentName} already exists.`.red);
   process.exit(1);

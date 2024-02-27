@@ -1,4 +1,7 @@
+import { withMuiTheme } from "./with-mui-theme.decorator";
+
 import "../src/index.css";
+
 /**
  * Read https://storybook.js.org/docs/react/configure/overview#configure-story-rendering
  * for more information about the purpose of this file.
@@ -66,3 +69,5 @@ import "../src/index.css";
  *
  * Will add a new dropdown in your toolbar with options light and dark.
  **/
+
+export const decorators = [withMuiTheme];
