@@ -7,12 +7,14 @@ interface TypographyProps {
 	children: any;
 	fontWeight?: FONT_WEIGHT;
 	fontStyle?: FONT_STYLE;
+  className?: string;
 }
 
-const Typography = ({ variant, children, fontWeight, fontStyle }: TypographyProps) => {
+const Typography = ({ variant, children, fontWeight, fontStyle, className }: TypographyProps) => {
 	const convertedFontWeight = useMemo(() => FONT_WEIGHT_VALUES?.[fontWeight] ? FONT_WEIGHT_VALUES?.[fontWeight] : fontWeight, [fontWeight]);
   return (
     <MuiTypography
+      className={className}
       variant={variant as any}
       fontWeight={convertedFontWeight}
       fontStyle={fontStyle}

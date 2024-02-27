@@ -1,20 +1,43 @@
 import React, { useState } from "react";
-import { FormControlLabel, Checkbox as MuiCheckbox } from "@mui/material";
+import { FormControlLabel, Checkbox as MuiCheckbox, styled } from "@mui/material";
+import { FONTS } from "../theme/Typography";
+
+const StyledFormControlLabel = styled(FormControlLabel, {
+  slot: "root",
+})<{ status?: string }>(({ theme }) => {
+
+  return {
+    '.MuiCheckbox-root': {
+      paddingRight: theme.spacing(1),
+    },
+    '.MuiFormControlLabel-label': {
+      fontFamily: FONTS.NUNITO,
+      fontWeight: 400,
+      fontSize: theme.typography.pxToRem(16),
+    }
+  }
+});
+
+const StyledCheckbox = styled(MuiCheckbox, {
+  slot: "root",
+})<{ status?: string }>(({ theme }) => {
+  return {
+    marginRight: '-2px',
+  }
+});
 
 const Checkbox = ({ label, defaultChecked, disabled }: any) => {
 	const [checked, setChecked] = useState(defaultChecked || false);
 
   return (
-    <FormControlLabel
+    <StyledFormControlLabel
+      label={label}
       control={
-        <MuiCheckbox
+        <StyledCheckbox
           checked={checked}
           defaultChecked={defaultChecked}
           onChange={(e) => {
             setChecked(e.target.checked);
-          }}
-          inputProps={{
-            "aria-label": label,
           }}
           disableFocusRipple
           disableTouchRipple
@@ -22,7 +45,6 @@ const Checkbox = ({ label, defaultChecked, disabled }: any) => {
           disabled={disabled}
         />
       }
-      label={label}
     />
   );
 };

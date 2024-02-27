@@ -101,7 +101,7 @@ const theme = createTheme({
       fontSize: t1.pxToRem(12),
     },
     [FONT_VARIANT.button]: {
-      fontFamily: FONTS.NUNITO,
+      fontFamily: FONTS.RED_HAT_DISPLAY,
       fontWeight: FONT_WEIGHT_VALUES.medium,
       fontSize: t1.pxToRem(14),
       lineHeight: 1.429,

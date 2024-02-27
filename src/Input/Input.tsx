@@ -1,7 +1,8 @@
 // Generated with util/create-component.js
 import React, { useCallback, useState } from "react";
-import { Box, TextField, Typography, styled } from "@mui/material";
-
+import { Box, TextField, styled } from "@mui/material";
+import Typography from "../Typography";
+import { FONT_VARIANT } from "../theme/Typography";
 
 const StyledWrapper = styled(Box, {
   shouldForwardProp: (prop) => prop !== "status",
@@ -15,8 +16,14 @@ const StyledWrapper = styled(Box, {
 	};
 
   return {
+		display: "flex",
+		flexDirection: "column",
     ".Input": {
+			"&__label": {
+				marginBottom: theme.spacing(0.5),
+			},
       "&__helper-text": {
+				marginTop: theme.spacing(0.5),
         color: colorMap?.[status] ? colorMap[status] : theme.palette.text.primary
       },
     },
@@ -42,7 +49,7 @@ const Input = ({ label, status, helperText, disabled, value: passedValue, fullWi
   return (
     <StyledWrapper status={status}>
 			{label && (
-				<Typography className="Input__label">{label}</Typography>
+				<Typography className="Input__label" variant={FONT_VARIANT.fieldLabel}>{label}</Typography>
 			)}
       <TextField
 				value={value}
@@ -52,7 +59,7 @@ const Input = ({ label, status, helperText, disabled, value: passedValue, fullWi
 				onChange={handleChange}
 			/>
 			{helperText && (
-				<Typography className="Input__helper-text">{helperText}</Typography>
+				<Typography className="Input__helper-text" variant={FONT_VARIANT.errorMessage}>{helperText}</Typography>
 			)}
     </StyledWrapper>
   );

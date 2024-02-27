@@ -15,11 +15,12 @@
     "storybook": "start-storybook -p 6007",
     "storybook:export": "build-storybook",
     "generate": "node ./util/create-component",
-    "prepublishOnly": "npm run build"
+    "predeploy": "npm run storybook:export",
+    "deploy-storybook": "gh-pages -d storybook-static"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/HarveyD/react-component-library.git"
+    "url": "git+https://github.com/cmcken22/component-library.git"
   },
   "keywords": [
     "React",
@@ -30,12 +31,9 @@
     "Sass",
     "Storybook"
   ],
-  "author": "Harvey Delaney",
+  "author": "Conner McKenna",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/HarveyD/react-component-library/issues"
-  },
-  "homepage": "https://github.com/HarveyD/react-component-library#readme",
+  "homepage": "http://cmcken22.github.io/component-library",
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -55,6 +53,7 @@
     "autoprefixer": "^10.4.13",
     "babel-loader": "^8.2.2",
     "babel-preset-react-app": "^10.0.0",
+    "gh-pages": "^6.1.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "react": "^18.2.0",
