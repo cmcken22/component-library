@@ -1,16 +1,17 @@
 import React, { useMemo } from "react";
 import { Typography as MuiTypography } from "@mui/material";
-import { FONT_WEIGHT, FONT_VARIANT, FONT_WEIGHT_VALUES, FONT_STYLE } from "../theme/Typography";
+import { FONT_WEIGHT_VALUES, FontVariant, FontWeight, FontStyle } from "../theme/Typography";
 
 interface TypographyProps {
-	variant: FONT_VARIANT;
+	variant: FontVariant;
 	children: any;
-	fontWeight?: FONT_WEIGHT;
-	fontStyle?: FONT_STYLE;
+	fontWeight?: FontWeight;
+	fontStyle?: FontStyle;
   className?: string;
+  color?: string;
 }
 
-const Typography = ({ variant, children, fontWeight, fontStyle, className }: TypographyProps) => {
+const Typography = ({ variant, children, fontWeight, fontStyle, className, color }: TypographyProps) => {
 	const convertedFontWeight = useMemo(() => FONT_WEIGHT_VALUES?.[fontWeight] ? FONT_WEIGHT_VALUES?.[fontWeight] : fontWeight, [fontWeight]);
   return (
     <MuiTypography
@@ -18,6 +19,7 @@ const Typography = ({ variant, children, fontWeight, fontStyle, className }: Typ
       variant={variant as any}
       fontWeight={convertedFontWeight}
       fontStyle={fontStyle}
+      color={color}
     >
       {children}
     </MuiTypography>

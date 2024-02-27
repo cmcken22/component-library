@@ -1,7 +1,7 @@
 import { createTheme } from "@mui/material";
 
 export enum FONTS {
-  RED_HAT_DISPLAY = "RedHatDisplay",
+  RED_HAT_DISPLAY = "Red Hat Display",
   NUNITO = "Nunito",
 };
 export enum FONT_WEIGHT {
@@ -11,15 +11,19 @@ export enum FONT_WEIGHT {
   bold = 'bold',
 };
 export const FONT_WEIGHT_VALUES = {
-  [FONT_WEIGHT.regular]: 'normal',
+  [FONT_WEIGHT.regular]: 400,
   [FONT_WEIGHT.medium]: 500,
   [FONT_WEIGHT.semiBold]: 600,
-  [FONT_WEIGHT.bold]: 'bold',
+  [FONT_WEIGHT.bold]: 700,
 };
+
+export type FontWeight = FONT_WEIGHT | keyof typeof FONT_WEIGHT;
+
 export enum FONT_STYLE {
   normal = 'normal',
   italic = 'italic',
 };
+export type FontStyle = FONT_STYLE | keyof typeof FONT_STYLE;
 
 export enum FONT_VARIANT {
   h1 = 'h1',
@@ -34,6 +38,8 @@ export enum FONT_VARIANT {
   errorMessage = 'error-message',
   fieldLabel = 'field-label',
 };
+
+export type FontVariant = FONT_VARIANT | keyof typeof FONT_VARIANT;
 
 declare module "@mui/material/styles/createTypography" {
   interface Typography {

@@ -98,7 +98,6 @@ export const PlainFont = Template2.bind({});
 PlainFont.args = {
 	variant: FONT_VARIANT.h1,
 	children: 'Sample Text',
-	// fontWeight: FONT_WEIGHT.regular
 };
 PlainFont.argTypes = {
   variant: {

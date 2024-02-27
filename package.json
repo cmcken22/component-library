@@ -12,11 +12,10 @@
     "build": "rollup -c",
     "test": "jest",
     "test:watch": "jest --watch",
+    "generate": "node ./util/create-component",
     "storybook": "start-storybook -p 6007",
     "storybook:export": "build-storybook",
-    "generate": "node ./util/create-component",
-    "predeploy": "npm run storybook:export",
-    "deploy-storybook": "gh-pages -d storybook-static"
+    "storybook:deploy": "gh-pages -d storybook-static"
   },
   "repository": {
     "type": "git",

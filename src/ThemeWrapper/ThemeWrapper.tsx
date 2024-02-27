@@ -1,6 +1,7 @@
 import React from "react";
 import { StyledEngineProvider, ThemeProvider, CssBaseline } from "@mui/material";
 import { theme } from "../theme";
+import '../index.css';
 
 const ThemeWrapper = ({ children }: any) => {
   return (

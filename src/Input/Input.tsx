@@ -26,6 +26,9 @@ const StyledWrapper = styled(Box, {
 				marginTop: theme.spacing(0.5),
         color: colorMap?.[status] ? colorMap[status] : theme.palette.text.primary
       },
+      "&__required-indicator": {
+				marginLeft: theme.spacing(0.25),
+      },
     },
 		'& .MuiOutlinedInput-root': {
 			'& fieldset': {
@@ -38,7 +41,18 @@ const StyledWrapper = styled(Box, {
   };
 });
 
-const Input = ({ label, status, helperText, disabled, value: passedValue, fullWidth, onChange }: any) => {
+interface InputProps {
+	label?: string;
+	status?: "error" | "warning" | "success";
+	helperText?: string;
+	disabled?: boolean;
+	value?: string;
+	fullWidth?: boolean;
+	required?: boolean;
+	onChange?: (value: string) => void;
+}
+
+const Input = ({ label, status, helperText, disabled, value: passedValue, fullWidth, required, onChange }: InputProps) => {
 	const [value, setValue] = useState(passedValue);
 
 	const handleChange = useCallback((e: any) => {
@@ -46,21 +60,53 @@ const Input = ({ label, status, helperText, disabled, value: passedValue, fullWi
 		if (onChange) onChange(e.target.value);
 	}, [setValue]);
 
+	const renderRequiredIndicator = useCallback(() => {
+		if (!required) return null;
+		return (
+			<Typography
+				className="Input__required-indicator"
+				variant={FONT_VARIANT.fieldLabel}
+				color="danger.main"
+			>
+				*
+			</Typography>
+		);
+	}, [required]);
+
+	const renderLabel = useCallback(() => {
+    if (!label) return null;
+    return (
+      <Box>
+        <Typography className="Input__label" variant={FONT_VARIANT.fieldLabel}>
+          {label}
+        </Typography>
+				{renderRequiredIndicator()}
+      </Box>
+    );
+  }, [label, renderRequiredIndicator]);
+
+	const renderHelperText = useCallback(() => {
+    if (!helperText) return null;
+    return (
+      <Box>
+        <Typography className="Input__helper-text" variant={FONT_VARIANT.errorMessage}>
+          {helperText}
+        </Typography>
+      </Box>
+    );
+  }, [helperText]);
+
   return (
     <StyledWrapper status={status}>
-			{label && (
-				<Typography className="Input__label" variant={FONT_VARIANT.fieldLabel}>{label}</Typography>
-			)}
+      {renderLabel()}
       <TextField
-				value={value}
-				variant="outlined"
-				disabled={disabled}
-				fullWidth={fullWidth}
-				onChange={handleChange}
-			/>
-			{helperText && (
-				<Typography className="Input__helper-text" variant={FONT_VARIANT.errorMessage}>{helperText}</Typography>
-			)}
+        value={value}
+        variant="outlined"
+        disabled={disabled}
+        fullWidth={fullWidth}
+        onChange={handleChange}
+      />
+      {renderHelperText()}
     </StyledWrapper>
   );
 };
