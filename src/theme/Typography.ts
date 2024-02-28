@@ -3,13 +3,13 @@ import { createTheme } from "@mui/material";
 export enum FONTS {
   RED_HAT_DISPLAY = "Red Hat Display",
   NUNITO = "Nunito",
-};
+}
 export enum FONT_WEIGHT {
-  regular = 'regular',
-  medium = 'medium',
-  semiBold = 'semiBold',
-  bold = 'bold',
-};
+  regular = "regular",
+  medium = "medium",
+  semiBold = "semiBold",
+  bold = "bold",
+}
 export const FONT_WEIGHT_VALUES = {
   [FONT_WEIGHT.regular]: 400,
   [FONT_WEIGHT.medium]: 500,
@@ -20,24 +20,24 @@ export const FONT_WEIGHT_VALUES = {
 export type FontWeight = FONT_WEIGHT | keyof typeof FONT_WEIGHT;
 
 export enum FONT_STYLE {
-  normal = 'normal',
-  italic = 'italic',
-};
+  normal = "normal",
+  italic = "italic",
+}
 export type FontStyle = FONT_STYLE | keyof typeof FONT_STYLE;
 
 export enum FONT_VARIANT {
-  h1 = 'h1',
-  h2 = 'h2',
-  h3 = 'h3',
-  h4 = 'h4',
-  h5 = 'h5',
-  bodyR = 'body-r',
-  bodyS = 'body-s',
-  bodyXS = 'body-xs',
-  button = 'button',
-  errorMessage = 'error-message',
-  fieldLabel = 'field-label',
-};
+  h1 = "h1",
+  h2 = "h2",
+  h3 = "h3",
+  h4 = "h4",
+  h5 = "h5",
+  bodyR = "bodyR",
+  bodyS = "bodyS",
+  bodyXS = "bodyXS",
+  button = "button",
+  errorMessage = "errorMessage",
+  fieldLabel = "fieldLabel",
+}
 
 export type FontVariant = FONT_VARIANT | keyof typeof FONT_VARIANT;
 
@@ -64,7 +64,7 @@ const theme = createTheme({
     fontFamily: [
       `${FONTS.RED_HAT_DISPLAY}, Arial, sans-serif`,
       `${FONTS.NUNITO}, sans-serif`,
-    ].join(','),
+    ].join(","),
     fontWeightLight: FONT_WEIGHT_VALUES.regular,
     fontWeightRegular: FONT_WEIGHT_VALUES.medium,
     fontWeightMedium: FONT_WEIGHT_VALUES.semiBold,
@@ -111,7 +111,7 @@ const theme = createTheme({
       fontWeight: FONT_WEIGHT_VALUES.medium,
       fontSize: t1.pxToRem(14),
       lineHeight: 1.429,
-      textTransform: 'none',
+      textTransform: "none",
     },
     [FONT_VARIANT.errorMessage]: {
       fontFamily: FONTS.NUNITO,
@@ -122,8 +122,8 @@ const theme = createTheme({
       fontFamily: FONTS.RED_HAT_DISPLAY,
       fontWeight: FONT_WEIGHT_VALUES.medium,
       fontSize: t1.pxToRem(12),
-    }
-  }
+    },
+  },
 });
 
 export default theme.typography;

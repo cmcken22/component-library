@@ -1,33 +1,39 @@
+import {
+  FormControlLabel,
+  Checkbox as MuiCheckbox,
+  styled,
+} from "@mui/material";
 import React, { useState } from "react";
-import { FormControlLabel, Checkbox as MuiCheckbox, styled } from "@mui/material";
 import { FONTS } from "../theme/Typography";
 
 const StyledFormControlLabel = styled(FormControlLabel, {
   slot: "root",
 })<{ status?: string }>(({ theme }) => {
-
   return {
-    '.MuiCheckbox-root': {
+    webkitUserSelect: "none",
+    msUserSelect: "none",
+    userSelect: "none",
+    ".MuiCheckbox-root": {
       paddingRight: theme.spacing(1),
     },
-    '.MuiFormControlLabel-label': {
+    ".MuiFormControlLabel-label": {
       fontFamily: FONTS.NUNITO,
       fontWeight: 400,
       fontSize: theme.typography.pxToRem(16),
-    }
-  }
+    },
+  };
 });
 
 const StyledCheckbox = styled(MuiCheckbox, {
   slot: "root",
 })<{ status?: string }>(({ theme }) => {
   return {
-    marginRight: '-2px',
-  }
+    marginRight: "-2px",
+  };
 });
 
 const Checkbox = ({ label, defaultChecked, disabled }: any) => {
-	const [checked, setChecked] = useState(defaultChecked || false);
+  const [checked, setChecked] = useState(defaultChecked || false);
 
   return (
     <StyledFormControlLabel
@@ -36,9 +42,7 @@ const Checkbox = ({ label, defaultChecked, disabled }: any) => {
         <StyledCheckbox
           checked={checked}
           defaultChecked={defaultChecked}
-          onChange={(e) => {
-            setChecked(e.target.checked);
-          }}
+          onChange={(e) => setChecked(e.target.checked)}
           disableFocusRipple
           disableTouchRipple
           disableRipple

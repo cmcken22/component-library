@@ -1,6 +1,6 @@
 // Generated with util/create-component.js
-import React, { useCallback, useState } from "react";
 import { Box, TextField, styled } from "@mui/material";
+import React, { useCallback, useState } from "react";
 import Typography from "../Typography";
 import { FONT_VARIANT } from "../theme/Typography";
 
@@ -8,105 +8,148 @@ const StyledWrapper = styled(Box, {
   shouldForwardProp: (prop) => prop !== "status",
   slot: "Root",
 })<{ status?: string }>(({ theme, status }) => {
-
-	const colorMap = {
-		error: theme.palette.error.main,
-		warning: theme.palette.warning.main,
-		success: theme.palette.success.main,
-	};
+  const colorMap = {
+    error: theme.palette.error.main,
+    warning: theme.palette.warning.main,
+    success: theme.palette.success.main,
+  };
 
   return {
-		display: "flex",
-		flexDirection: "column",
+    display: "flex",
+    flexDirection: "column",
     ".Input": {
-			"&__label": {
-				marginBottom: theme.spacing(0.5),
-			},
+      "&__label": {
+        marginBottom: theme.spacing(0.5),
+      },
       "&__helper-text": {
-				marginTop: theme.spacing(0.5),
-        color: colorMap?.[status] ? colorMap[status] : theme.palette.text.primary
+        marginTop: theme.spacing(0.5),
+        color: colorMap?.[status]
+          ? colorMap[status]
+          : theme.palette.text.primary,
+        lineHeight: "13.64px",
       },
       "&__required-indicator": {
-				marginLeft: theme.spacing(0.25),
+        marginLeft: theme.spacing(0.25),
       },
     },
-		'& .MuiOutlinedInput-root': {
-			'& fieldset': {
-				borderColor: colorMap?.[status] ? `${colorMap[status]} !important` : '',
-			},
-			'&:hover fieldset': {
-				borderColor: colorMap?.[status] ? `${colorMap[status]} !important` : theme.palette.primary.main,
-			},
-		}
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: colorMap?.[status] ? `${colorMap[status]} !important` : "",
+      },
+      "&:hover fieldset": {
+        borderColor: colorMap?.[status]
+          ? `${colorMap[status]} !important`
+          : theme.palette.primary.main,
+      },
+    },
   };
 });
 
 interface InputProps {
-	label?: string;
-	status?: "error" | "warning" | "success";
-	helperText?: string;
-	disabled?: boolean;
-	value?: string;
-	fullWidth?: boolean;
-	required?: boolean;
-	onChange?: (value: string) => void;
+  label?: string;
+  placeholder?: string;
+  status?: "error" | "warning" | "success";
+  helperText?: string;
+  disabled?: boolean;
+  value?: string;
+  fullWidth?: boolean;
+  required?: boolean;
+  labelPosition?: "top" | "left";
+  onChange?: (value: string) => void;
 }
 
-const Input = ({ label, status, helperText, disabled, value: passedValue, fullWidth, required, onChange }: InputProps) => {
-	const [value, setValue] = useState(passedValue);
+const Input = ({
+  label,
+  placeholder,
+  status,
+  helperText,
+  disabled,
+  value: passedValue,
+  fullWidth,
+  required,
+  labelPosition = "top",
+  onChange,
+}: InputProps) => {
+  const [value, setValue] = useState(passedValue);
 
-	const handleChange = useCallback((e: any) => {
-		setValue(e.target.value);
-		if (onChange) onChange(e.target.value);
-	}, [setValue]);
+  const handleChange = useCallback(
+    (e: any) => {
+      setValue(e.target.value);
+      if (onChange) onChange(e.target.value);
+    },
+    [setValue]
+  );
 
-	const renderRequiredIndicator = useCallback(() => {
-		if (!required) return null;
-		return (
-			<Typography
-				className="Input__required-indicator"
-				variant={FONT_VARIANT.fieldLabel}
-				color="danger.main"
-			>
-				*
-			</Typography>
-		);
-	}, [required]);
+  const renderRequiredIndicator = useCallback(() => {
+    if (!required) return null;
+    return (
+      <Typography
+        className="Input__required-indicator"
+        variant={FONT_VARIANT.fieldLabel}
+        color="danger.main"
+      >
+        *
+      </Typography>
+    );
+  }, [required]);
 
-	const renderLabel = useCallback(() => {
+  const renderLabel = useCallback(() => {
     if (!label) return null;
     return (
-      <Box>
+      <Box
+        sx={{
+          ...(helperText &&
+            labelPosition === "left" && {
+              mb: "17px",
+            }),
+        }}
+      >
         <Typography className="Input__label" variant={FONT_VARIANT.fieldLabel}>
           {label}
         </Typography>
-				{renderRequiredIndicator()}
+        {renderRequiredIndicator()}
       </Box>
     );
-  }, [label, renderRequiredIndicator]);
+  }, [label, renderRequiredIndicator, helperText, labelPosition]);
 
-	const renderHelperText = useCallback(() => {
+  const renderHelperText = useCallback(() => {
     if (!helperText) return null;
     return (
-      <Box>
-        <Typography className="Input__helper-text" variant={FONT_VARIANT.errorMessage}>
-          {helperText}
-        </Typography>
-      </Box>
+      <Typography
+        className="Input__helper-text"
+        variant={FONT_VARIANT.errorMessage}
+      >
+        {helperText}
+      </Typography>
     );
   }, [helperText]);
 
   return (
     <StyledWrapper status={status}>
-      {renderLabel()}
-      <TextField
-        value={value}
-        variant="outlined"
-        disabled={disabled}
-        fullWidth={fullWidth}
-        onChange={handleChange}
-      />
-      {renderHelperText()}
+      <Box
+        sx={{
+          width: "fit-content",
+          ...(labelPosition === "left" && {
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: 1,
+          }),
+        }}
+      >
+        {renderLabel()}
+        <Box display="flex" flexDirection="column">
+          <TextField
+            placeholder={placeholder}
+            value={value}
+            variant="outlined"
+            disabled={disabled}
+            fullWidth={fullWidth}
+            onChange={handleChange}
+          />
+          {renderHelperText()}
+        </Box>
+      </Box>
     </StyledWrapper>
   );
 };

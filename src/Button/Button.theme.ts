@@ -1,4 +1,4 @@
-import { FONTS } from "../theme/Typography";
+import { hexToRGBA } from "./Button";
 
 export default {
   styleOverrides: {
@@ -18,10 +18,32 @@ export default {
         return {
           ...baseStyles,
           "&:hover": {
-            backgroundColor: theme.palette[ownerState.color].light,
+            backgroundColor: hexToRGBA(
+              theme.palette[ownerState.color].main,
+              0.1
+            ),
           },
           "&:active": {
-            backgroundColor: theme.palette[ownerState.color].dark,
+            backgroundColor: hexToRGBA(
+              theme.palette[ownerState.color].main,
+              0.2
+            ),
+          },
+        };
+      }
+      if (variant === "link") {
+        return {
+          ...baseStyles,
+          color: theme.palette[ownerState.color].main,
+          "&:hover": {
+            color: theme.palette[ownerState.color].light,
+            backgroundColor: "transparent",
+          },
+          "&:active": {
+            color: theme.palette[ownerState.color].dark,
+          },
+          "&:disabled": {
+            opacity: 0.4,
           },
         };
       }

@@ -1,10 +1,9 @@
-import { Box, Button as MuiButton, Typography, styled } from "@mui/material";
+import { Box, Button as MuiButton } from "@mui/material";
 import React, { ReactNode, useCallback } from "react";
-// import "./Button.scss";
 
 export interface ButtonProps {
   children?: ReactNode;
-  variant?: any;
+  variant?: "contained" | "outlined" | "link";
   color?: any;
   onClick?: () => void;
   disabled?: boolean;
@@ -19,17 +18,11 @@ export function hexToRGBA(hex: string, opacity: number) {
   return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }
 
-const StyledButton = styled(MuiButton)(
-  ({ theme, color = "primary", variant, disabled }: any) => {
-		return {};
-	}
-);
-
 const Button = ({
   children,
   onClick,
-  color = 'primary',
-  variant = 'contained',
+  color = "primary",
+  variant = "contained",
   disabled,
   icon,
 }: ButtonProps) => {
@@ -38,9 +31,9 @@ const Button = ({
   }, [onClick]);
 
   return (
-    <StyledButton
+    <MuiButton
       onClick={handleClick}
-      variant={variant}
+      variant={variant as any}
       color={color}
       disabled={disabled}
       disableTouchRipple
@@ -55,10 +48,8 @@ const Button = ({
           }}
         ></Box>
       )}
-      {/* <Typography variant="button" sx={{ fontWeight: "bold" }}>
-      </Typography> */}
       {children}
-    </StyledButton>
+    </MuiButton>
   );
 };
 

@@ -24,10 +24,18 @@ fs.mkdirSync(componentDirectory);
 const generatedTemplates = templates.map((template) => template(componentName));
 
 generatedTemplates.forEach((template) => {
-  fs.writeFileSync(
-    `${componentDirectory}/${componentName}${template.extension}`,
-    template.content
-  );
+  console.log('template:', template);
+  if (template.extension === 'index.ts') {
+    fs.writeFileSync(
+      `${componentDirectory}/${template.extension}`,
+      template.content
+    );
+  } else {
+    fs.writeFileSync(
+      `${componentDirectory}/${componentName}${template.extension}`,
+      template.content
+    );
+  }
 });
 
 console.log(

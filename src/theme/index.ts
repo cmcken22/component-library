@@ -4,6 +4,7 @@ import ButtonTheme from "../Button/Button.theme";
 import CheckboxTheme from "../Checkbox/Checkbox.theme";
 import InputTheme from "../Input/Input.theme";
 import typography from "./Typography";
+import RadioButtonTheme from "../RadioButton/RadioButton.theme";
 
 const theme = createTheme({
   typography,
@@ -15,6 +16,8 @@ const theme = createTheme({
     MuiCheckbox: CheckboxTheme,
     // @ts-ignore
     MuiTextField: InputTheme,
+    // @ts-ignore
+    MuiRadio: RadioButtonTheme
   },
 });
 

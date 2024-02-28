@@ -13,9 +13,9 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "generate": "node ./util/create-component",
-    "storybook": "start-storybook -p 6007",
-    "storybook:export": "build-storybook",
-    "storybook:deploy": "gh-pages -d storybook-static"
+    "sb": "start-storybook -p 6007",
+    "sb:export": "build-storybook",
+    "sb:deploy": "gh-pages -d storybook-static"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-
 import Button from "./Button";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -39,7 +38,7 @@ Primary.argTypes = {
     control: { type: "select" },
   },
   variant: {
-    options: ["contained", "outlined"],
+    options: ["contained", "outlined", "link"],
     control: { type: "select" },
   },
 };
@@ -49,7 +48,7 @@ Secondary.argTypes = {
     control: { type: "select" },
   },
   variant: {
-    options: ["contained", "outlined"],
+    options: ["contained", "outlined", "link"],
     control: { type: "select" },
   },
 };
@@ -59,7 +58,7 @@ Danger.argTypes = {
     control: { type: "select" },
   },
   variant: {
-    options: ["contained", "outlined"],
+    options: ["contained", "outlined", "link"],
     control: { type: "select" },
   },
 };
