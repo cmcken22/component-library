@@ -8,14 +8,34 @@ const ToggleContainer = styled(Box, {
 })<{ checked?: boolean; disabled?: boolean }>(
   ({ theme, checked, disabled }) => {
     return {
+      cursor: disabled ? "default" : "pointer",
       display: "flex",
       alignItems: "center",
+      width: "fit-content",
       "& .ToggleLabel": {
+        webkitUserSelect: "none",
+        msUserSelect: "none",
+        userSelect: "none",
         marginLeft: "8px",
         color: disabled
           ? theme.palette.charcoal["60"]
           : theme.palette.charcoal["90"],
       },
+      ...(!disabled && {
+        "&:hover": {
+          ".ToggleWrapper": {
+            borderColor: theme.palette.primary.main,
+            ".ToggleText--OFF": {
+              color: theme.palette.primary.main,
+            },
+            ...(!checked && {
+              ".ToggleIndicator": {
+                background: theme.palette.primary.main,
+              },
+            }),
+          },
+        },
+      }),
     };
   }
 );
@@ -80,17 +100,15 @@ const ToggleIndicator = styled(Box, {
 const ToggleText = styled(Box, {
   shouldForwardProp: (prop) => prop !== "checked",
   slot: "root",
-})<{ checked?: boolean; disabled?: boolean }>(
-  ({ theme, checked, disabled }) => {
-    return {
-      height: "100%",
-      width: "50%",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-    };
-  }
-);
+})(({ theme }) => {
+  return {
+    height: "100%",
+    width: "50%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
+});
 
 interface ToggleProps {
   checked: boolean;
@@ -147,9 +165,13 @@ const Toggle = ({
   }, [label]);
 
   return (
-    <ToggleContainer disabled={disabled}>
+    <ToggleContainer
+      disabled={disabled}
+      checked={checked}
+      onClick={() => handleChange(!checked)}
+    >
       <ToggleWrapper
-        onClick={() => handleChange(!checked)}
+        className="ToggleWrapper"
         checked={checked}
         disabled={disabled}
       >

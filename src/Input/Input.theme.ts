@@ -8,6 +8,7 @@ export default {
       const borderColor = ownerState.error
         ? theme.palette.tertiary.main
         : theme.palette.charcoal["20"];
+      console.log("theme:", theme);
       return {
         width: ownerState.fullWidth ? "100%" : "240px",
         fieldset: {
@@ -20,7 +21,13 @@ export default {
           padding: "0 12px",
         },
         ".MuiInputBase-root": {
-          height: "36px",
+          paddingTop: theme.typography.pxToRem(6.5),
+          paddingBottom: theme.typography.pxToRem(6.5),
+          // minHeight: "36px",
+        },
+        ".MuiInputBase-multiline": {
+          // paddingTop: 0,
+          // paddingBottom: 0,
         },
         "& .MuiOutlinedInput-root": {
           "&:hover fieldset": {

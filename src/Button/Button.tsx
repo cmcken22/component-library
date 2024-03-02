@@ -1,5 +1,7 @@
 import { Box, Button as MuiButton } from "@mui/material";
 import React, { ReactNode, useCallback } from "react";
+import Icon from "../Icon";
+import { IconVariantType } from "../Icon/Icon";
 
 export interface ButtonProps {
   children?: ReactNode;
@@ -7,7 +9,9 @@ export interface ButtonProps {
   color?: any;
   onClick?: () => void;
   disabled?: boolean;
-  icon?: boolean;
+  // icon?: boolean;
+  iconLeft: IconVariantType | React.FC<React.SVGProps<SVGSVGElement>>;
+  iconRight: IconVariantType | React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
 export function hexToRGBA(hex: string, opacity: number) {
@@ -24,7 +28,8 @@ const Button = ({
   color = "primary",
   variant = "contained",
   disabled,
-  icon,
+  iconLeft,
+  iconRight,
 }: ButtonProps) => {
   const handleClick = useCallback(() => {
     if (onClick) onClick();
@@ -38,17 +43,17 @@ const Button = ({
       disabled={disabled}
       disableTouchRipple
     >
-      {icon && (
-        <Box
-          sx={{
-            height: "16px",
-            width: "16px",
-            background: "red",
-            mr: 1,
-          }}
-        ></Box>
+      {iconLeft && (
+        <Box mr={1}>
+          <Icon icon={iconLeft} height="16px" width="16px" />
+        </Box>
       )}
       {children}
+      {iconRight && (
+        <Box ml={1}>
+          <Icon icon={iconRight} height="16px" width="16px" />
+        </Box>
+      )}
     </MuiButton>
   );
 };

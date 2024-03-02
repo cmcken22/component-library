@@ -12,6 +12,9 @@ export default {
         "&.Mui-disabled": {
           opacity: 0.4,
         },
+        ".icon-wrapper": {
+          color: "white",
+        },
       };
 
       if (variant === "outlined") {
@@ -29,6 +32,9 @@ export default {
               0.2
             ),
           },
+          ".icon-wrapper": {
+            color: theme.palette[ownerState.color].main,
+          },
         };
       }
       if (variant === "link") {
@@ -44,6 +50,9 @@ export default {
           },
           "&:disabled": {
             opacity: 0.4,
+          },
+          ".icon-wrapper": {
+            color: theme.palette[ownerState.color].main,
           },
         };
       }

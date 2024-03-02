@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
+import React, { useMemo } from "react";
+import { IconVariant } from "../Icon";
 import Button from "./Button";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -9,56 +10,69 @@ export default {
 } as ComponentMeta<typeof Button>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+const Template: ComponentStory<typeof Button> = (args) => {
+  const iconLeft: any = useMemo(() => {
+    // @ts-ignore
+    if (args?.iconLeft === "undefined") return undefined;
+    return args?.iconLeft;
+  }, [args?.iconLeft]);
 
-export const Primary = Template.bind({});
-Primary.args = {
-  children: "Primary",
+  const iconRight: any = useMemo(() => {
+    // @ts-ignore
+    if (args?.iconRight === "undefined") return undefined;
+    return args?.iconRight;
+  }, [args?.iconRight]);
+
+  return <Button {...args} iconLeft={iconLeft} iconRight={iconRight} />;
+};
+
+export const Sample = Template.bind({});
+Sample.args = {
+  children: "Sample Button",
   variant: "contained",
   color: "primary",
 };
-
-export const Secondary = Template.bind({});
-Secondary.args = {
-  children: "Secondary",
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  children: "Click Me",
   variant: "contained",
-  color: "secondary",
+  color: "primary",
+  iconLeft: "Heart",
 };
 
-export const Danger = Template.bind({});
-Danger.args = {
-  children: "Danger",
-  variant: "contained",
-  color: "danger",
-};
-
-Primary.argTypes = {
+Sample.argTypes = {
   color: {
-    options: ["primary"],
+    options: ["primary", "secondary", "danger"],
     control: { type: "select" },
   },
   variant: {
     options: ["contained", "outlined", "link"],
     control: { type: "select" },
   },
+  iconLeft: {
+    options: ["undefined", ...Object.keys(IconVariant)],
+    control: { type: "select" },
+  },
+  iconRight: {
+    options: ["undefined", ...Object.keys(IconVariant)],
+    control: { type: "select" },
+  },
 };
-Secondary.argTypes = {
+WithIcon.argTypes = {
   color: {
-    options: ["secondary"],
+    options: ["primary", "secondary", "danger"],
     control: { type: "select" },
   },
   variant: {
     options: ["contained", "outlined", "link"],
     control: { type: "select" },
   },
-};
-Danger.argTypes = {
-  color: {
-    options: ["danger"],
+  iconLeft: {
+    options: ["undefined", ...Object.keys(IconVariant)],
     control: { type: "select" },
   },
-  variant: {
-    options: ["contained", "outlined", "link"],
+  iconRight: {
+    options: ["undefined", ...Object.keys(IconVariant)],
     control: { type: "select" },
   },
 };

@@ -70,6 +70,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.11",
     "colors": "^1.4.0",
+    "iconoir-react": "^7.4.0",
     "rollup-plugin-generate-package-json": "^3.2.0"
   }
 }
