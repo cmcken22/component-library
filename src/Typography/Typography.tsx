@@ -36,8 +36,6 @@ const Typography = ({
     [fontWeight]
   );
 
-  console.log("variant:", variant);
-
   return (
     <MuiTypography
       className={className}

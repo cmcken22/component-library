@@ -1,19 +1,17 @@
-import TestComponent from "./TestComponent";
-import Input from "./Input";
 import Button from "./Button";
 import Checkbox from "./Checkbox";
-import Typography from "./Typography";
+import Input from "./Input";
 import ThemeWrapper from "./ThemeWrapper";
-import { theme, Colors, palette } from "./theme";
+import Typography from "./Typography";
+import { Colors, palette, theme } from "./theme";
 
 export {
-  TestComponent,
-  Input,
   Button,
   Checkbox,
-  Typography,
-  theme,
   Colors,
-  palette,
+  Input,
   ThemeWrapper,
+  Typography,
+  palette,
+  theme,
 };
