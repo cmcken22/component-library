@@ -1,3 +1,4 @@
+import { action, withActions } from "@storybook/addon-actions";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React, { useMemo } from "react";
 import { IconVariant } from "../Icon";
@@ -31,15 +32,9 @@ Sample.args = {
   children: "Sample Button",
   variant: "contained",
   color: "primary",
+  onHover: (e) => action("onHover")(e),
 };
-export const WithIcon = Template.bind({});
-WithIcon.args = {
-  children: "Click Me",
-  variant: "contained",
-  color: "primary",
-  iconLeft: "Heart",
-};
-
+Sample.decorators = [withActions("click")];
 Sample.argTypes = {
   color: {
     options: ["primary", "secondary", "danger"],
@@ -58,6 +53,16 @@ Sample.argTypes = {
     control: { type: "select" },
   },
 };
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  children: "Click Me",
+  variant: "contained",
+  color: "primary",
+  iconLeft: "Heart",
+  onHover: (e) => action("onHover")(e),
+};
+WithIcon.decorators = [withActions("click")];
 WithIcon.argTypes = {
   color: {
     options: ["primary", "secondary", "danger"],

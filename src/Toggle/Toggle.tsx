@@ -3,20 +3,21 @@ import React, { useCallback, useState } from "react";
 import Typography from "../Typography";
 
 const ToggleContainer = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "checked",
+  shouldForwardProp: (prop) => prop !== "checked" && prop !== "labelPosition",
   slot: "root",
-})<{ checked?: boolean; disabled?: boolean }>(
-  ({ theme, checked, disabled }) => {
+})<{ checked?: boolean; disabled?: boolean; labelPosition?: string }>(
+  ({ theme, checked, disabled, labelPosition }) => {
     return {
       cursor: disabled ? "default" : "pointer",
       display: "flex",
+      flexDirection: labelPosition === "right" ? "row-reverse" : "row",
+      gap: "8px",
       alignItems: "center",
       width: "fit-content",
       "& .ToggleLabel": {
         webkitUserSelect: "none",
         msUserSelect: "none",
         userSelect: "none",
-        marginLeft: "8px",
         color: disabled
           ? theme.palette.charcoal["60"]
           : theme.palette.charcoal["90"],
@@ -116,6 +117,11 @@ interface ToggleProps {
   onChange: (value: boolean) => void;
   displayToggleText?: boolean;
   label?: string;
+  sx?: any;
+  labelPosition?: "left" | "right";
+  // TODO:
+  // onHover?: () => void;
+  // tooltip?: string;
 }
 
 const Toggle = ({
@@ -124,11 +130,14 @@ const Toggle = ({
   onChange,
   displayToggleText,
   label,
+  labelPosition,
+  sx,
 }: ToggleProps) => {
   const [checked, setChecked] = useState(passedValue || false);
 
   const handleChange = useCallback(
     (value: boolean) => {
+      console.log("__handleChange", value);
       if (disabled) return;
       setChecked(value);
       if (onChange) onChange(value);
@@ -169,6 +178,8 @@ const Toggle = ({
       disabled={disabled}
       checked={checked}
       onClick={() => handleChange(!checked)}
+      labelPosition={labelPosition}
+      sx={sx}
     >
       <ToggleWrapper
         className="ToggleWrapper"

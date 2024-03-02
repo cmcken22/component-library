@@ -8,6 +8,7 @@ export interface InputProps
 }
 
 const Input = ({
+  id,
   label,
   placeholder,
   status,
@@ -21,6 +22,7 @@ const Input = ({
 }: InputProps) => {
   return (
     <BaseInput
+      id={id}
       placeholder={placeholder}
       label={label}
       status={status}

@@ -1,5 +1,6 @@
-import { Box, TextField, styled } from "@mui/material";
-import React, { useCallback, useState } from "react";
+import { Box, InputAdornment, TextField, styled } from "@mui/material";
+import React, { useCallback, useMemo, useState } from "react";
+import Icon, { IconVariant } from "../Icon";
 import Typography from "../Typography";
 import { FONT_VARIANT } from "../theme/Typography";
 
@@ -16,9 +17,19 @@ const StyledWrapper = styled(Box, {
   return {
     display: "flex",
     flexDirection: "column",
+    color: colorMap?.[status],
     input: {
       overflow: "hidden",
       textOverflow: "ellipsis",
+      "&:-internal-autofill-selected": {
+        backgroundColor: "red",
+      },
+    },
+    "input:-internal-autofill-selected": {
+      backgroundColor: "red",
+    },
+    ".icon-wrapper": {
+      color: colorMap?.[status],
     },
     ".Input": {
       "&__label": {
@@ -26,9 +37,6 @@ const StyledWrapper = styled(Box, {
       },
       "&__helper-text": {
         marginTop: theme.spacing(0.5),
-        color: colorMap?.[status]
-          ? colorMap[status]
-          : theme.palette.text.primary,
         lineHeight: "13.64px",
       },
       "&__required-indicator": {
@@ -39,16 +47,17 @@ const StyledWrapper = styled(Box, {
       "& fieldset": {
         borderColor: colorMap?.[status] ? `${colorMap[status]} !important` : "",
       },
-      "&:hover fieldset": {
-        borderColor: colorMap?.[status]
-          ? `${colorMap[status]} !important`
-          : theme.palette.primary.main,
-      },
+      // "&:hover fieldset": {
+      //   borderColor: colorMap?.[status]
+      //     ? `${colorMap[status]} !important`
+      //     : theme.palette.primary.main,
+      // },
     },
   };
 });
 
 export interface BaseInputProps {
+  id?: string;
   label?: string;
   placeholder?: string;
   status?: "error" | "warning" | "success";
@@ -65,6 +74,7 @@ export interface BaseInputProps {
 }
 
 const BaseInput = ({
+  id,
   label,
   placeholder,
   status,
@@ -113,7 +123,11 @@ const BaseInput = ({
             }),
         }}
       >
-        <Typography className="Input__label" variant={FONT_VARIANT.fieldLabel}>
+        <Typography
+          className="Input__label"
+          variant={FONT_VARIANT.fieldLabel}
+          color="text.primary"
+        >
           {label}
         </Typography>
         {renderRequiredIndicator()}
@@ -133,8 +147,15 @@ const BaseInput = ({
     );
   }, [helperText]);
 
+  const statusIcon = useMemo(() => {
+    if (!status) return null;
+    if (status === "error") return IconVariant.Close1;
+    if (status === "warning") return IconVariant.Warning;
+    if (status === "success") return IconVariant.Success;
+  }, [status]);
+
   return (
-    <StyledWrapper status={status}>
+    <StyledWrapper id={id} status={status}>
       <Box
         sx={{
           width: "fit-content",
@@ -160,6 +181,13 @@ const BaseInput = ({
             minRows={minRows}
             sx={{
               whiteSpace: !multiline ? "nowrap" : "",
+            }}
+            InputProps={{
+              endAdornment: status && (
+                <InputAdornment position="end">
+                  <Icon icon={statusIcon} height="20px" width="20px" />
+                </InputAdornment>
+              ),
             }}
           />
           {renderHelperText()}

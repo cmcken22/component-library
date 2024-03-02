@@ -1,26 +1,28 @@
+import { Box, styled } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import RadioButton from "../RadioButton";
-import { Box, styled } from "@mui/material";
 
 const RadioButtonGroupWrapper = styled(Box, {
-	shouldForwardProp: (prop) => prop !== "row",
+  shouldForwardProp: (prop) => prop !== "row",
   slot: "root",
 })<{ row?: boolean }>(({ theme, row }) => {
   return {
-		...(!row ? {
-			display: 'flex',
-      flexDirection: 'column',
-      '.RadioButtonWrapper': {
-        marginBottom: theme.spacing(2),
-      }
-		} : {
-      display: 'flex',
-      flexDirection: 'row',
-      '.RadioButtonWrapper': {
-        marginRight: theme.spacing(2),
-      }
-    })
-  }
+    ...(!row
+      ? {
+          display: "flex",
+          flexDirection: "column",
+          ".RadioButtonWrapper": {
+            marginBottom: theme.spacing(2),
+          },
+        }
+      : {
+          display: "flex",
+          flexDirection: "row",
+          ".RadioButtonWrapper": {
+            marginRight: theme.spacing(2),
+          },
+        }),
+  };
 });
 
 interface RadioButtonGroupProps {
@@ -29,19 +31,35 @@ interface RadioButtonGroupProps {
   onChange: (value: any) => void;
   disabled?: boolean;
   row?: boolean;
+  allowDeselect?: boolean;
 }
 
-const RadioButtonGroup = ({ options, value: selectedValue, onChange, disabled, row }: RadioButtonGroupProps) => {
+const RadioButtonGroup = ({
+  options,
+  value: selectedValue,
+  onChange,
+  disabled,
+  row,
+  allowDeselect,
+}: RadioButtonGroupProps) => {
   const [value, setValue] = useState(selectedValue || null);
 
-  const getOptionChecked = useCallback((optionValue: any) => {
-    return optionValue === value;
-  }, [value]);
+  const getOptionChecked = useCallback(
+    (optionValue: any) => {
+      return optionValue === value;
+    },
+    [value]
+  );
 
-  const handleChange = useCallback((value: any, checked: any) => {
-    setValue(checked ? value : null);
-    if (onChange) onChange(checked ? value : null);
-  }, [setValue, onChange]);
+  const handleChange = useCallback(
+    (value: any, checked: any) => {
+      let nextValue = value;
+      if (allowDeselect) nextValue = checked ? value : null;
+      setValue(nextValue);
+      if (onChange) onChange(nextValue);
+    },
+    [setValue, onChange, allowDeselect]
+  );
 
   return (
     <RadioButtonGroupWrapper row={row}>
@@ -56,6 +74,14 @@ const RadioButtonGroup = ({ options, value: selectedValue, onChange, disabled, r
       ))}
     </RadioButtonGroupWrapper>
   );
+};
+
+RadioButtonGroup.defaultProps = {
+  options: [],
+  value: null,
+  disabled: false,
+  row: false,
+  allowDeselect: false,
 };
 
 export default RadioButtonGroup;

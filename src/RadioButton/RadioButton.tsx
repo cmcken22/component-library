@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from "react";
 import { Box, FormControlLabel, styled } from "@mui/material";
+import React, { useCallback, useState } from "react";
 import { hexToRGBA } from "../Button/Button";
 import { FONTS } from "../theme/Typography";
 
@@ -71,28 +71,34 @@ const StyledFormControlLabel = styled(FormControlLabel, {
   };
 });
 
+interface RadioButtonProps {
+  checked?: boolean;
+  disabled?: boolean;
+  label: string;
+  value: any;
+  onChange: (value: any, checked: boolean) => void;
+  allowDeselect?: boolean;
+}
+
 const RadioButton = ({
   checked: passedValue,
   disabled,
   label,
   value,
   onChange,
-}: any) => {
+  allowDeselect,
+}: RadioButtonProps) => {
   const [checked, setChecked] = useState(passedValue || false);
-
-  // useEffect(() => {
-  // 	if (passedValue !== checked) {
-  // 		setChecked(passedValue);
-  // 	}
-  // }, [passedValue, checked]);
 
   const handleChange = useCallback(
     (checked: boolean) => {
       if (disabled) return;
-      setChecked(checked);
-      if (onChange) onChange(value, checked);
+      if (checked || allowDeselect) {
+        setChecked(checked);
+        if (onChange) onChange(value, checked);
+      }
     },
-    [setChecked, onChange, disabled, value]
+    [setChecked, onChange, disabled, value, allowDeselect]
   );
 
   return (
@@ -115,6 +121,12 @@ const RadioButton = ({
       />
     </RadioButtonWrapper>
   );
+};
+
+RadioButton.defaultProps = {
+  checked: false,
+  disabled: false,
+  allowDeselect: false,
 };
 
 export default RadioButton;

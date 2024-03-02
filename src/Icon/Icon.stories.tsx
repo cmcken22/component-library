@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+import { action } from "@storybook/addon-actions";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import Typography from "../Typography";
@@ -33,12 +34,11 @@ const Template: ComponentStory<typeof Icon> = (args) => (
       return (
         <Box
           key={icon.name}
+          onClick={() => action("onClick")(icon.name)}
           sx={{
             width: "60px",
-            // width: "fit-content",
             mb: 1,
             overflow: "hidden",
-            // background: "red",
           }}
         >
           <Box

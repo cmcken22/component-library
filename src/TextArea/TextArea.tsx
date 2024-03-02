@@ -8,6 +8,7 @@ interface TextAreaProps extends Omit<BaseInputProps, "multiline"> {
 }
 
 const TextArea = ({
+  id,
   label,
   placeholder,
   status,
@@ -23,6 +24,7 @@ const TextArea = ({
 }: TextAreaProps) => {
   return (
     <BaseInput
+      id={id}
       placeholder={placeholder}
       multiline
       minRows={minRows}

@@ -9,9 +9,9 @@ export interface ButtonProps {
   color?: any;
   onClick?: () => void;
   disabled?: boolean;
-  // icon?: boolean;
   iconLeft: IconVariantType | React.FC<React.SVGProps<SVGSVGElement>>;
   iconRight: IconVariantType | React.FC<React.SVGProps<SVGSVGElement>>;
+  onHover?: () => void;
 }
 
 export function hexToRGBA(hex: string, opacity: number) {
@@ -30,6 +30,7 @@ const Button = ({
   disabled,
   iconLeft,
   iconRight,
+  onHover,
 }: ButtonProps) => {
   const handleClick = useCallback(() => {
     if (onClick) onClick();
@@ -42,6 +43,7 @@ const Button = ({
       color={color}
       disabled={disabled}
       disableTouchRipple
+      onMouseEnter={onHover}
     >
       {iconLeft && (
         <Box mr={1}>

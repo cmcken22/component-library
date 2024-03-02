@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import Input from "./Input";
@@ -19,6 +20,7 @@ Primary.args = {
   value: "Hello world",
   fullWidth: false,
   labelPosition: "top",
+  onChange: (e) => action("onChange")(e),
 };
 
 Primary.argTypes = {
@@ -31,3 +33,4 @@ Primary.argTypes = {
     control: { type: "select" },
   },
 };
+// Primary.decorators = [withActions("click")];

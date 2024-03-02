@@ -1,8 +1,8 @@
-// Generated with util/create-component.js
-import React from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import RadioButton from "./RadioButton";
 import { Box } from "@mui/material";
+import { action } from "@storybook/addon-actions";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import React from "react";
+import RadioButton from "./RadioButton";
 
 export default {
   title: "ReactComponentLibrary/RadioButton",
@@ -10,22 +10,25 @@ export default {
 } as ComponentMeta<typeof RadioButton>;
 
 const Template: ComponentStory<typeof RadioButton> = (args) => (
-  <Box sx={{
-    ml: 2
-  }}>
+  <Box
+    sx={{
+      ml: 2,
+    }}
+  >
     <RadioButton {...args} />
   </Box>
 );
 
-export const RadioButton2 = Template.bind({});
-RadioButton2.args = {
+export const Sample = Template.bind({});
+Sample.args = {
   label: "Radio Button",
   value: "radio",
   checked: false,
   disabled: false,
+  onChange: (value, checked) => action("onChange")(value, checked),
 };
 
-RadioButton2.argTypes = {
+Sample.argTypes = {
   status: {
     options: ["error", "success", "warning"],
     control: { type: "select" },
