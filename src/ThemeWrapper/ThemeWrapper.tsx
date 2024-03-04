@@ -1,7 +1,11 @@
+import {
+  CssBaseline,
+  StyledEngineProvider,
+  ThemeProvider,
+} from "@mui/material";
 import React from "react";
-import { StyledEngineProvider, ThemeProvider, CssBaseline } from "@mui/material";
+import "../index.css";
 import { theme } from "../theme";
-import '../index.css';
 
 const ThemeWrapper = ({ children }: any) => {
   return (

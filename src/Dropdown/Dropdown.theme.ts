@@ -1,0 +1,10 @@
+// Generated with util/create-component.js
+export default {
+  styleOverrides: {
+    root: ({ theme, ownerState }: any) => {
+      return {
+        height: "36px",
+      };
+    },
+  },
+};

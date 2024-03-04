@@ -1,11 +1,21 @@
-// import { hexToRGBA } from "../Button/Button";
-
 import { FONT_WEIGHT_VALUES } from "../theme/Typography";
 
 export default {
   styleOverrides: {
     root: ({ theme, ownerState }: any) => {
+      console.log("ownerState:", ownerState);
+
       return {
+        // "input::-webkit-outer-spin-button": {
+        //   margin: 0,
+        // },
+        // "input::-webkit-inner-spin-button": {
+        //   "-webkit-appearance": "none",
+        //   margin: 0,
+        // },
+        // "input[type=number]": {
+        //   "-moz-appearance": "textfield",
+        // },
         ".MuiInputBase-root": {
           padding: 0,
         },
@@ -15,6 +25,7 @@ export default {
         width: ownerState.fullWidth ? "100%" : "240px",
         fieldset: {
           borderWidth: "1px !important",
+          // borderColor: "green !important",
         },
         input: {
           ...theme.typography["bodyR"],
@@ -28,6 +39,11 @@ export default {
           paddingLeft: theme.typography.pxToRem(8),
           paddingRight: theme.typography.pxToRem(8),
         },
+        // "& .MuiOutlinedInput-root": {
+        //   "& fieldset": {
+        //     borderColor: "FUCKING_RED",
+        //   },
+        // },
       };
     },
   },

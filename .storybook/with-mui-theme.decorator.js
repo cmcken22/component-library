@@ -1,20 +1,17 @@
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import { StyledEngineProvider } from "@mui/material/styles";
-import {theme} from "../src/theme";
 import { ThemeWrapper } from "../src/index";
+import { theme } from "../src/theme";
 
 export const withMuiTheme = (Story, context) => {
-
-  console.log('theme', theme);
+  console.log("theme", theme);
 
   return (
     <ThemeWrapper>
-    {/* <StyledEngineProvider injectFirst> */}
+      {/* <StyledEngineProvider injectFirst> */}
       {/* <ThemeProvider theme={theme}> */}
-        <CssBaseline />
-        <Story />
+      {/* <CssBaseline /> */}
+      <Story />
       {/* </ThemeProvider> */}
-    {/* </StyledEngineProvider> */}
+      {/* </StyledEngineProvider> */}
     </ThemeWrapper>
   );
 };
