@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme, useTheme } from "@mui/material";
 import BaseInputTheme from "src/BaseInput/BaseInput.theme";
 import ButtonTheme from "src/Button/Button.theme";
 import CheckboxTheme from "src/Checkbox/Checkbox.theme";
@@ -19,4 +19,9 @@ const theme = createTheme({
   },
 });
 
-export { Colors, palette, theme };
+const useEllisDonTheme = () => {
+  const theme = useTheme();
+  return theme;
+};
+
+export { Colors, palette, theme, useEllisDonTheme };

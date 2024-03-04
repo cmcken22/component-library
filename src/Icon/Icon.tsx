@@ -1,5 +1,6 @@
-import { Box, useTheme } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
+import { useEllisDonTheme } from "src/theme";
 import IconMap from "./Icon.map";
 
 export type IconVariantType = keyof typeof IconMap;
@@ -18,7 +19,7 @@ export interface BaseIconProps {
 }
 
 const Icon = ({ icon, color, height, width, className, sx }: BaseIconProps) => {
-  const theme = useTheme();
+  const theme = useEllisDonTheme();
   const IconComponent =
     typeof icon === "string" ? IconMap[icon!] : (icon as any);
 

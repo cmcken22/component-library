@@ -3,6 +3,7 @@ import { action } from "@storybook/addon-actions";
 import { ComponentStory } from "@storybook/react";
 import React from "react";
 import Typography from "../Typography";
+import { useEllisDonTheme } from "../theme";
 
 export default {
   title: "Colors",
@@ -24,24 +25,8 @@ function isDarkColor(hexCode) {
   return luminance < 0.46;
 }
 
-import { Theme as MuiTheme, useTheme as useMuiTheme } from "@mui/material";
-
-interface Theme extends Omit<MuiTheme, "palette"> {
-  palette: Omit<MuiTheme["palette"], "grey">;
-}
-
-const useTheme = () => {
-  const theme = useMuiTheme();
-  return theme as Theme;
-};
-
-// export default useTheme;
-
 const Template: ComponentStory<any> = (args) => {
-  // for (let k in Colors) {
-  //   console.log(k, Colors[k]);
-  // }
-  const theme = useTheme();
+  const theme = useEllisDonTheme();
   console.log("theme:", theme);
 
   return (

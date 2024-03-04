@@ -8,7 +8,8 @@ export interface TextAreaProps extends BaseInputProps {
   minRows?: number;
   onChange?: (value: string) => void;
   debounce?: number;
-  maxLength?: number;
+  maxChars?: number;
+  maxWords?: number;
 }
 
 const TextArea = ({
@@ -26,7 +27,8 @@ const TextArea = ({
   minRows,
   onChange,
   debounce,
-  maxLength,
+  maxChars,
+  maxWords,
 }: any) => {
   const [value, setValue] = useState(passedValue || "");
 
@@ -39,7 +41,14 @@ const TextArea = ({
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (maxLength && e.target.value.length > maxLength) return;
+      console.log("maxWords:", maxWords);
+      console.log("maxChars:", maxChars);
+      if ((maxChars || maxChars === 0) && e.target.value.length > maxChars) {
+        return;
+      }
+      if (maxWords && e.target.value.split(" ").length > maxWords) {
+        return;
+      }
       setValue(e.target.value);
       if (onChange) {
         if (debounce || debounce === 0) {
@@ -47,7 +56,7 @@ const TextArea = ({
         } else onChange(e.target.value);
       }
     },
-    [onChange, setValue, debounce, debounceOnChange, maxLength]
+    [onChange, setValue, debounce, debounceOnChange, maxChars, maxWords]
   );
 
   return (

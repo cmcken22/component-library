@@ -21,7 +21,7 @@ export interface InputProps extends BaseInputProps {
   disabled?: boolean;
   type?: "text" | "password" | "number";
   debounce?: number;
-  maxLength?: number;
+  maxChars?: number;
 }
 
 const Input = ({
@@ -38,7 +38,7 @@ const Input = ({
   type,
   onChange,
   debounce,
-  maxLength,
+  maxChars,
 }: InputProps) => {
   const [value, setValue] = useState(passedValue || "");
 
@@ -51,7 +51,9 @@ const Input = ({
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (maxLength && e.target.value.length > maxLength) return;
+      if ((maxChars || maxChars === 0) && e.target.value.length > maxChars) {
+        return;
+      }
       setValue(e.target.value);
       if (onChange) {
         if (debounce || debounce === 0) {
@@ -59,7 +61,7 @@ const Input = ({
         } else onChange(e.target.value);
       }
     },
-    [onChange, setValue, debounce, debounceOnChange, maxLength]
+    [onChange, setValue, debounce, debounceOnChange, maxChars]
   );
 
   return (

@@ -132,4 +132,5 @@ TextArea.args = {
     "I’m typing a bunch of text here just to show what it looks like when it’s filled.",
   required: true,
   onChange: (e) => action("onChange")(e),
+  maxWords: 3,
 };
