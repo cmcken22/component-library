@@ -1,9 +1,9 @@
 import { Box, InputAdornment, TextField } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import { NumericFormat } from "react-number-format";
-import BaseInput from "../../BaseInput";
-import Typography from "../../Typography";
-import { InputProps } from "../Input";
+import BaseInput from "src/BaseInput";
+import { InputProps } from "src/Input";
+import Typography from "src/Typography";
 
 // @ts-ignore
 export interface PercentInputProps extends InputProps {
@@ -57,15 +57,12 @@ const Percent = ({
   }, []);
 
   return (
-    <BaseInput
-      id={id}
-      required={required}
-      status={status}
-      labelPosition={labelPosition}
-    >
+    <BaseInput id={id} status={status}>
       {({ endAdornment }: any) => (
         <>
-          <BaseInput.Label>{label}</BaseInput.Label>
+          <BaseInput.Label required={required} position={labelPosition}>
+            {label}
+          </BaseInput.Label>
           <NumericFormat
             value={value}
             onValueChange={handleChange}

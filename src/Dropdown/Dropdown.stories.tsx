@@ -40,8 +40,8 @@ Primary.args = {
 };
 
 Primary.argTypes = {
-  // status: {
-  //   options: ["error", "success", "warning"],
-  //   control: { type: "select" },
-  // },
+  status: {
+    options: ["error", "success", "warning"],
+    control: { type: "select" },
+  },
 };

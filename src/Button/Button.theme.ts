@@ -1,4 +1,4 @@
-import { hexToRGBA } from "./Button";
+import { hexToRGBA } from "../utils";
 
 export default {
   styleOverrides: {
@@ -7,6 +7,7 @@ export default {
 
       const baseStyles = {
         ...theme.typography.button,
+        width: "fit-content",
         boxShadow: "none !important",
         textTransform: "none",
         "&.Mui-disabled": {

@@ -1,8 +1,8 @@
 import { InputAdornment, TextField } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import { NumericFormat } from "react-number-format";
-import BaseInput from "../../BaseInput";
-import Icon, { IconVariant } from "../../Icon";
+import BaseInput from "src/BaseInput";
+import Icon, { IconVariant } from "src/Icon";
 import { InputProps } from "../Input";
 
 // @ts-ignore
@@ -48,7 +48,7 @@ const Currency = ({
   return (
     <BaseInput
       id={id}
-      required={required}
+      // required={required}
       status={status}
       labelPosition={labelPosition}
     >

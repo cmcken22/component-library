@@ -28,6 +28,7 @@ const Icon = ({ icon, color, height, width, className, sx }: BaseIconProps) => {
     <Box
       className={`icon-wrapper ${className}`}
       sx={{
+        display: "flex",
         color: color ? color : "charcoal.90",
         height: height ? height : "24px",
         width: width ? width : "24px",

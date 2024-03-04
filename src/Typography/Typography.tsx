@@ -1,4 +1,5 @@
 import { Typography as MuiTypography } from "@mui/material";
+import cx from "classnames";
 import React, { useMemo } from "react";
 import {
   FONT_WEIGHT_VALUES,
@@ -15,6 +16,7 @@ interface TypographyProps {
   className?: string;
   color?: string;
   fontSize?: string;
+  preventTextSelection?: boolean;
   sx?: any;
 }
 
@@ -26,6 +28,7 @@ const Typography = ({
   className,
   color,
   fontSize,
+  preventTextSelection,
   sx,
 }: TypographyProps) => {
   const convertedFontWeight = useMemo(
@@ -38,17 +41,29 @@ const Typography = ({
 
   return (
     <MuiTypography
-      className={className}
+      className={cx(className)}
       variant={variant as any}
       fontWeight={convertedFontWeight}
       fontStyle={fontStyle}
       color={color}
       fontSize={fontSize}
-      sx={sx}
+      sx={{
+        ...(preventTextSelection && {
+          webkitUserSelect: "none",
+          msUserSelect: "none",
+          userSelect: "none",
+        }),
+        ...sx,
+      }}
     >
       {children}
     </MuiTypography>
   );
+};
+
+Typography.defaultProps = {
+  preventTextSelection: false,
+  sx: {},
 };
 
 export default Typography;

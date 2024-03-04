@@ -1,11 +1,14 @@
 import { TextField } from "@mui/material";
-import React from "react";
-import BaseInput, { BaseInputProps } from "../../BaseInput";
+import _debounce from "lodash.debounce";
+import React, { useCallback, useState } from "react";
+import BaseInput, { BaseInputProps } from "src/BaseInput";
 
-export interface TextAreaProps extends Omit<BaseInputProps, "multiline"> {
+export interface TextAreaProps extends BaseInputProps {
   maxRows?: number;
   minRows?: number;
   onChange?: (value: string) => void;
+  debounce?: number;
+  maxLength?: number;
 }
 
 const TextArea = ({
@@ -22,31 +25,49 @@ const TextArea = ({
   maxRows,
   minRows,
   onChange,
-}: TextAreaProps) => {
+  debounce,
+  maxLength,
+}: any) => {
+  const [value, setValue] = useState(passedValue || "");
+
+  const debounceOnChange = useCallback(
+    _debounce((value: any) => {
+      if (onChange) onChange(value);
+    }, debounce),
+    [debounce, onChange]
+  );
+
+  const handleChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (maxLength && e.target.value.length > maxLength) return;
+      setValue(e.target.value);
+      if (onChange) {
+        if (debounce || debounce === 0) {
+          debounceOnChange(e.target.value);
+        } else onChange(e.target.value);
+      }
+    },
+    [onChange, setValue, debounce, debounceOnChange, maxLength]
+  );
+
   return (
-    <BaseInput
-      id={id}
-      status={status}
-      disabled={disabled}
-      required={required}
-      labelPosition={labelPosition}
-    >
+    <BaseInput id={id} status={status} disabled={disabled}>
       {({ endAdornment }: any) => (
         <>
-          <BaseInput.Label>{label}</BaseInput.Label>
+          <BaseInput.Label required={required} position={labelPosition}>
+            {label}
+          </BaseInput.Label>
           <TextField
-            value={passedValue}
+            value={value}
             placeholder={placeholder}
             variant="outlined"
             disabled={disabled}
             fullWidth={fullWidth}
-            onChange={(e) => onChange?.(e.target.value)}
+            onChange={handleChange}
             multiline
             minRows={minRows}
             maxRows={maxRows}
-            InputProps={{
-              endAdornment,
-            }}
+            InputProps={{ endAdornment }}
           />
           <BaseInput.HelperText>{helperText}</BaseInput.HelperText>
         </>

@@ -9,13 +9,13 @@ export default {
 } as ComponentMeta<typeof Input>;
 
 const Template: ComponentStory<typeof Input> = (args) => <Input {...args} />;
-const CurrencyTemplate: ComponentStory<typeof Input> = (args) => (
+const CurrencyTemplate: ComponentStory<typeof Input.Currency> = (args) => (
   <Input.Currency {...args} />
 );
-const PercentTemplate: ComponentStory<typeof Input> = (args) => (
+const PercentTemplate: ComponentStory<typeof Input.Percent> = (args) => (
   <Input.Percent {...args} />
 );
-const TextAreaTemplate: ComponentStory<typeof Input> = (args) => (
+const TextAreaTemplate: ComponentStory<typeof Input.TextArea> = (args) => (
   <Input.TextArea {...args} />
 );
 
@@ -28,6 +28,33 @@ Primary.args = {
   helperText: "Helper Text",
   required: false,
   value: "Hello world",
+  fullWidth: false,
+  labelPosition: "top",
+  onChange: (e) => action("onChange")(e),
+  debounce: 500,
+};
+
+Primary.argTypes = {
+  status: {
+    options: ["error", "success", "warning"],
+    control: { type: "select" },
+  },
+  labelPosition: {
+    options: ["top", "left"],
+    control: { type: "select" },
+  },
+};
+
+export const Password = Template.bind({});
+Password.args = {
+  id: "Password",
+  label: "Password",
+  type: "password",
+  placeholder: "Enter a password",
+  disabled: false,
+  helperText: "Enter your password",
+  required: false,
+  value: "",
   fullWidth: false,
   labelPosition: "top",
   onChange: (e) => action("onChange")(e),

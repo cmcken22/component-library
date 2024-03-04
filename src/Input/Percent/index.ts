@@ -1,2 +1,2 @@
 // Generated with util/create-component.js
-export { default } from "./Percent";
+export { PercentInputProps, default } from "./Percent";

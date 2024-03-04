@@ -1,3 +1,5 @@
+const path = require("path");
+
 module.exports = {
   stories: ["../src/**/*.stories.tsx"],
   // Add any Storybook addons you want here: https://storybook.js.org/addons/
@@ -11,6 +13,11 @@ module.exports = {
       },
     });
     config.resolve.extensions.push(".ts", ".tsx");
+
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      src: path.resolve(__dirname, "../src"), // Adjust this path according to your project structure
+    };
 
     return config;
   },

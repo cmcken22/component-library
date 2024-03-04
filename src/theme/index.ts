@@ -1,9 +1,9 @@
 import { createTheme } from "@mui/material";
-import BaseInputTheme from "../BaseInput/BaseInput.theme";
-import ButtonTheme from "../Button/Button.theme";
-import CheckboxTheme from "../Checkbox/Checkbox.theme";
-import DropdownTheme from "../Dropdown/Dropdown.theme";
-import RadioButtonTheme from "../RadioButton/RadioButton.theme";
+import BaseInputTheme from "src/BaseInput/BaseInput.theme";
+import ButtonTheme from "src/Button/Button.theme";
+import CheckboxTheme from "src/Checkbox/Checkbox.theme";
+import DropdownTheme from "src/Dropdown/Dropdown.theme";
+import RadioButtonTheme from "src/RadioButton/RadioButton.theme";
 import typography from "./Typography";
 import { Colors, palette } from "./palette";
 

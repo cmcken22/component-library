@@ -1,16 +1,9 @@
 import "@testing-library/jest-dom";
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent } from "@testing-library/react";
 import "jest-styled-components";
 import React from "react";
-import ThemeWrapper from "../ThemeWrapper";
+import { customRender } from "../utils/testUtils";
 import Input, { InputProps } from "./Input";
-
-const AllTheProviders = ({ children }) => {
-  return <ThemeWrapper>{children}</ThemeWrapper>;
-};
-
-const customRender = (ui, options) =>
-  render(ui, { wrapper: AllTheProviders, ...options });
 
 describe("Input", () => {
   let props: InputProps;

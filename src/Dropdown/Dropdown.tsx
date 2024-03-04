@@ -1,12 +1,13 @@
 // Generated with util/create-component.js
-import { Box, FormControl, MenuItem, Select } from "@mui/material";
+import { FormControl, MenuItem, Select } from "@mui/material";
 import cx from "classnames";
 import React, { useCallback, useMemo, useState } from "react";
+import { useOnHover } from "src/Hooks";
 import BaseInput from "../BaseInput";
-import Icon, { IconVariant } from "../Icon";
 import Typography from "../Typography";
+import DropdownIcon from "./DropdownIcon";
 
-interface StandardDropdownOptions {
+interface StandardDropdownOption {
   label: string;
   value: string;
   disabled?: boolean;
@@ -16,7 +17,8 @@ interface DropdownProps {
   id: string;
   label: string;
   placeholder?: string;
-  status?: "error" | "success";
+  open?: boolean;
+  status?: "error" | "success" | "warning";
   helperText?: string;
   disabled?: boolean;
   value: string;
@@ -25,16 +27,18 @@ interface DropdownProps {
   labelPosition?: "top" | "left";
   onChange?: (value: string) => void;
   startAdornment: () => React.ReactNode;
-  options: StandardDropdownOptions[] | any[];
+  options: StandardDropdownOption[] | any[];
   getOptionLabel?: (option: any) => string;
   getOptionValue?: (option: any) => string;
   getOptionDisabled?: (option: any) => boolean;
+  onHover?: (hovered: boolean) => void;
 }
 
 const Dropdown = ({
   id,
   label,
   placeholder,
+  open: defaultOpen,
   status,
   helperText,
   disabled,
@@ -47,9 +51,11 @@ const Dropdown = ({
   getOptionLabel,
   getOptionValue,
   getOptionDisabled,
+  onHover,
 }: DropdownProps) => {
   const [value, setValue] = useState(passedValue || "");
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(defaultOpen || false);
+  const onHoverMethods = useOnHover(onHover);
 
   const handleChange = useCallback(
     (e: any) => {
@@ -98,6 +104,7 @@ const Dropdown = ({
               className={cx("dropdown", {
                 "dropdown--open": open,
               })}
+              {...{ onHoverMethods }}
               onOpen={() => setOpen(true)}
               onClose={() => setOpen(false)}
               displayEmpty
@@ -106,43 +113,11 @@ const Dropdown = ({
               onChange={handleChange}
               renderValue={(value) => renderSelectedValue(value, selectedValue)}
               disabled={disabled}
-              IconComponent={(props: any) => {
-                if (endAdornment) {
-                  return (
-                    <Box
-                      {...props}
-                      sx={{
-                        top: "8px !important",
-                        margin: "0",
-                        height: "20px",
-                        width: "20px",
-                        display: "flex",
-                        alignItems: "center",
-                        transform: "rotate(0deg) !important",
-                        ".MuiInputAdornment-root": {
-                          margin: "0",
-                        },
-                      }}
-                    >
-                      {endAdornment}
-                    </Box>
-                  );
-                }
-                return (
-                  <Icon
-                    className={props?.className}
-                    icon={IconVariant.NavArrowDown}
-                    height="20px"
-                    width="20px"
-                    color="charcoal.dark"
-                    sx={{
-                      top: "calc(50% - 10px) !important",
-                    }}
-                  />
-                );
-              }}
+              IconComponent={(props: any) => (
+                <DropdownIcon endAdornment={endAdornment} {...props} />
+              )}
             >
-              {options?.map((opt: any) => {
+              {options?.map((opt: StandardDropdownOption | any) => {
                 const value = getOptionValue ? getOptionValue(opt) : opt?.value;
                 const optDisabled = getOptionDisabled
                   ? getOptionDisabled(opt)
@@ -164,6 +139,11 @@ const Dropdown = ({
       )}
     </BaseInput>
   );
+};
+
+Dropdown.defaultProps = {
+  labelPosition: "top",
+  options: [],
 };
 
 export default Dropdown;

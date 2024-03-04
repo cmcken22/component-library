@@ -1,24 +1,14 @@
 import { TextField } from "@mui/material";
 import cx from "classnames";
+import _debounce from "lodash.debounce";
 import React, { useCallback, useState } from "react";
-import BaseInput, { BaseInputProps } from "../BaseInput";
+import BaseInput, { BaseInputProps } from "src/BaseInput";
 import Currency from "./Currency";
 import Percent from "./Percent";
 import TextArea from "./TextArea";
 
-// export interface BaseInputProps {
-//   id?: string;
-//   status?: "error" | "warning" | "success";
-//   disabled?: boolean;
-//   fullWidth?: boolean;
-//   children?:
-//     | React.ReactNode
-//     | React.JSX.Element
-//     | ((props: any) => React.ReactNode);
-//   containerSx?: any;
-// }
-
 export interface InputProps extends BaseInputProps {
+  id?: string;
   label?: string;
   placeholder?: string;
   helperText?: string;
@@ -29,10 +19,9 @@ export interface InputProps extends BaseInputProps {
   endAdornment?: React.ReactNode;
   fullWidth?: boolean;
   disabled?: boolean;
-  // multiline?: boolean;
-  // maxRows?: number;
-  // minRows?: number;
-  // type?: string;
+  type?: "text" | "password" | "number";
+  debounce?: number;
+  maxLength?: number;
 }
 
 const Input = ({
@@ -46,16 +35,31 @@ const Input = ({
   fullWidth,
   required,
   labelPosition = "top",
+  type,
   onChange,
+  debounce,
+  maxLength,
 }: InputProps) => {
   const [value, setValue] = useState(passedValue || "");
 
+  const debounceOnChange = useCallback(
+    _debounce((value: any) => {
+      if (onChange) onChange(value);
+    }, debounce),
+    [debounce, onChange]
+  );
+
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+      if (maxLength && e.target.value.length > maxLength) return;
       setValue(e.target.value);
-      if (onChange) onChange(e.target.value);
+      if (onChange) {
+        if (debounce || debounce === 0) {
+          debounceOnChange(e.target.value);
+        } else onChange(e.target.value);
+      }
     },
-    [onChange, setValue]
+    [onChange, setValue, debounce, debounceOnChange, maxLength]
   );
 
   return (
@@ -68,6 +72,7 @@ const Input = ({
           <TextField
             className={cx(className)}
             placeholder={placeholder}
+            type={type}
             value={value}
             variant="outlined"
             disabled={disabled}
@@ -85,6 +90,7 @@ const Input = ({
 Input.defaultProps = {
   labelPosition: "top",
   multiline: false,
+  type: "text",
 };
 
 Input.Currency = Currency;

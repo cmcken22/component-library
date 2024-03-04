@@ -1,7 +1,6 @@
 import { Box, Button as MuiButton } from "@mui/material";
 import React, { ReactNode, useCallback } from "react";
-import Icon from "../Icon";
-import { IconVariantType } from "../Icon/Icon";
+import Icon, { IconVariantType } from "src/Icon";
 
 export interface ButtonProps {
   children?: ReactNode;
@@ -9,17 +8,9 @@ export interface ButtonProps {
   color?: any;
   onClick?: () => void;
   disabled?: boolean;
-  iconLeft: IconVariantType | React.FC<React.SVGProps<SVGSVGElement>>;
-  iconRight: IconVariantType | React.FC<React.SVGProps<SVGSVGElement>>;
+  iconLeft?: IconVariantType | React.FC<React.SVGProps<SVGSVGElement>>;
+  iconRight?: IconVariantType | React.FC<React.SVGProps<SVGSVGElement>>;
   onHover?: () => void;
-}
-
-export function hexToRGBA(hex: string, opacity: number) {
-  hex = hex.replace("#", "");
-  const r = parseInt(hex.substring(0, 2), 16);
-  const g = parseInt(hex.substring(2, 4), 16);
-  const b = parseInt(hex.substring(4, 6), 16);
-  return `rgba(${r}, ${g}, ${b}, ${opacity})`;
 }
 
 const Button = ({

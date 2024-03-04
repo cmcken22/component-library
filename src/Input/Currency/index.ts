@@ -1,2 +1,2 @@
 // Generated with util/create-component.js
-export { default } from "./Currency";
+export { CurrencyInputProps, default } from "./Currency";
