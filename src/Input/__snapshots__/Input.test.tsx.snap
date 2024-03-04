@@ -1,0 +1,332 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Input renders correctly: Input test 1 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-tot46x"
+    data-testid="Input"
+    id="test_id"
+  >
+    <div
+      class="Input-container MuiBox-root css-eye1ln"
+    >
+      <div
+        class="MuiBox-root css-0"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-fieldLabel Input__label css-tl9j0x-MuiTypography-root"
+        >
+          This is a label
+        </span>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root css-rh3oz2-MuiFormControl-root-MuiTextField-root"
+      >
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl css-1m54fg7-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input css-smitoi-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":r0:"
+            placeholder="placeholder"
+            type="text"
+            value="12345"
+          />
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <span
+        class="MuiTypography-root MuiTypography-errorMessage Input__helper-text css-3yxls5-MuiTypography-root"
+      >
+        helperText
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Input should have error state: Input error state 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-v8lsnt"
+    data-testid="Input"
+    id="test_id"
+  >
+    <div
+      class="Input-container MuiBox-root css-eye1ln"
+    >
+      <div
+        class="MuiBox-root css-0"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-fieldLabel Input__label css-tl9j0x-MuiTypography-root"
+        >
+          This is a label
+        </span>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root status--error css-rh3oz2-MuiFormControl-root-MuiTextField-root"
+      >
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-1tjabls-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-oq1q8e-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":r7:"
+            placeholder="placeholder"
+            type="text"
+            value="12345"
+          />
+          <div
+            class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+          >
+            <div
+              class="icon-wrapper undefined MuiBox-root css-nuxmg4"
+            >
+              <svg
+                fill="transparent"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M9.1712 14.8284L11.9996 12M14.8281 9.17157L11.9996 12M11.9996 12L9.1712 9.17157M11.9996 12L14.8281 14.8284"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </div>
+          </div>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <span
+        class="MuiTypography-root MuiTypography-errorMessage Input__helper-text css-3yxls5-MuiTypography-root"
+      >
+        helperText
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Input should have success state: Input success state 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-us1v1j"
+    data-testid="Input"
+    id="test_id"
+  >
+    <div
+      class="Input-container MuiBox-root css-eye1ln"
+    >
+      <div
+        class="MuiBox-root css-0"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-fieldLabel Input__label css-tl9j0x-MuiTypography-root"
+        >
+          This is a label
+        </span>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root status--success css-rh3oz2-MuiFormControl-root-MuiTextField-root"
+      >
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-1tjabls-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-oq1q8e-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":r5:"
+            placeholder="placeholder"
+            type="text"
+            value="12345"
+          />
+          <div
+            class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+          >
+            <div
+              class="icon-wrapper undefined MuiBox-root css-nuxmg4"
+            >
+              <svg
+                fill="transparent"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7 12.5L10 15.5L17 8.5"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </div>
+          </div>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <span
+        class="MuiTypography-root MuiTypography-errorMessage Input__helper-text css-3yxls5-MuiTypography-root"
+      >
+        helperText
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Input should have warning state: Input warning state 1`] = `
+<div>
+  <div
+    class="MuiBox-root css-1unn91"
+    data-testid="Input"
+    id="test_id"
+  >
+    <div
+      class="Input-container MuiBox-root css-eye1ln"
+    >
+      <div
+        class="MuiBox-root css-0"
+      >
+        <span
+          class="MuiTypography-root MuiTypography-fieldLabel Input__label css-tl9j0x-MuiTypography-root"
+        >
+          This is a label
+        </span>
+      </div>
+      <div
+        class="MuiFormControl-root MuiTextField-root status--warning css-rh3oz2-MuiFormControl-root-MuiTextField-root"
+      >
+        <div
+          class="MuiInputBase-root MuiOutlinedInput-root MuiInputBase-colorPrimary MuiInputBase-formControl MuiInputBase-adornedEnd css-1tjabls-MuiInputBase-root-MuiOutlinedInput-root"
+        >
+          <input
+            aria-invalid="false"
+            class="MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputAdornedEnd css-oq1q8e-MuiInputBase-input-MuiOutlinedInput-input"
+            id=":r6:"
+            placeholder="placeholder"
+            type="text"
+            value="12345"
+          />
+          <div
+            class="MuiInputAdornment-root MuiInputAdornment-positionEnd MuiInputAdornment-outlined MuiInputAdornment-sizeMedium css-1laqsz7-MuiInputAdornment-root"
+          >
+            <div
+              class="icon-wrapper undefined MuiBox-root css-nuxmg4"
+            >
+              <svg
+                fill="transparent"
+                height="24"
+                viewBox="0 0 24 24"
+                width="24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20.0429 21H3.95705C2.41902 21 1.45658 19.3364 2.22324 18.0031L10.2662 4.01533C11.0352 2.67792 12.9648 2.67791 13.7338 4.01532L21.7768 18.0031C22.5434 19.3364 21.581 21 20.0429 21Z"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M12 9V13"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-width="1.5"
+                />
+                <path
+                  d="M12 17.01L12.01 16.9989"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                />
+              </svg>
+            </div>
+          </div>
+          <fieldset
+            aria-hidden="true"
+            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
+          >
+            <legend
+              class="css-ihdtdm"
+            >
+              <span
+                class="notranslate"
+              >
+                ​
+              </span>
+            </legend>
+          </fieldset>
+        </div>
+      </div>
+      <span
+        class="MuiTypography-root MuiTypography-errorMessage Input__helper-text css-3yxls5-MuiTypography-root"
+      >
+        helperText
+      </span>
+    </div>
+  </div>
+</div>
+`;

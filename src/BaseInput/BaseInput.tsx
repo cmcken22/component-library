@@ -1,21 +1,33 @@
 import { Box, InputAdornment, styled } from "@mui/material";
 import cx from "classnames";
-import React, { createContext, useCallback, useMemo } from "react";
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
+} from "react";
 import Icon, { IconVariant } from "../Icon";
-import Typography from "../Typography";
-import { FONT_VARIANT } from "../theme/Typography";
+import HelperText from "./HelperText";
+import Label from "./Label";
 
 const StyledWrapper = styled(Box, {
   shouldForwardProp: (prop) => prop !== "status",
   slot: "Root",
-})<{ status?: string }>(({ theme, status }) => {
+})<{ status?: string; disabled?: boolean }>(({ theme, status, disabled }) => {
   const colorMap = {
     error: theme.palette.error.main,
     warning: theme.palette.warning.main,
     success: theme.palette.success.main,
   };
 
+  let borderColor = colorMap?.[status]
+    ? `${colorMap?.[status]} !important`
+    : theme.palette.charcoal["20"];
+  if (disabled) borderColor = theme.palette.charcoal["20"];
+
   return {
+    width: "fit-content",
     display: "flex",
     flexDirection: "column",
     color: colorMap?.[status],
@@ -44,114 +56,106 @@ const StyledWrapper = styled(Box, {
         marginLeft: theme.spacing(0.25),
       },
     },
-    "& .MuiOutlinedInput-root": {
+    "& .MuiInputBase-root:not(.Mui-disabled)": {
       "& fieldset": {
-        borderColor: colorMap?.[status] ? `${colorMap[status]} !important` : "",
+        borderColor: borderColor,
       },
-      // "&:hover fieldset": {
-      //   borderColor: colorMap?.[status]
-      //     ? `${colorMap[status]} !important`
-      //     : theme.palette.primary.main,
-      // },
+      "&:hover fieldset": {
+        borderColor: !disabled ? theme.palette.primary.main : "",
+      },
+    },
+    "& .MuiInputBase-root.Mui-disabled": {
+      "& fieldset": {
+        borderColor: borderColor,
+      },
+      "&:hover fieldset": {
+        borderColor: theme.palette.charcoal["20"],
+      },
+    },
+  };
+});
+
+const PlacementContainer = styled(Box, {
+  shouldForwardProp: (prop) => prop !== "fullWidth",
+  slot: "root",
+})<{ fullWidth?: boolean }>(({ fullWidth }) => {
+  return {
+    "&.Input-container": {
+      display: "flex",
+      flexDirection: "column",
+      width: fullWidth ? "100%" : "fit-content",
+      "&--align-left": {
+        display: "grid",
+        gridTemplateColumns: "1fr",
+        gridTemplateRows: "1fr 1fr",
+        gap: "0px 8px",
+        gridTemplateAreas: `
+          ". ."
+          ". ."
+        `,
+      },
     },
   };
 });
 
 export interface BaseInputProps {
   id?: string;
-  label?: string;
-  placeholder?: string;
   status?: "error" | "warning" | "success";
-  helperText?: string;
   disabled?: boolean;
-  value?: string;
   fullWidth?: boolean;
-  required?: boolean;
-  labelPosition?: "top" | "left";
-  multiline?: boolean;
-  maxRows?: number;
-  minRows?: number;
-  startAdornment?: React.ReactNode;
-  endAdornment?: React.ReactNode;
-  onChange?: (value: string) => void;
-  type?: string;
-  children?: React.ReactNode | React.JSX.Element;
+  children?:
+    | React.ReactNode
+    | React.JSX.Element
+    | ((props: any) => React.ReactNode);
+  containerSx?: any;
 }
 
 type InputContext = {
   status: "error" | "warning" | "success" | undefined;
   required?: boolean;
+  disabled?: boolean;
   labelPosition?: "top" | "left";
   endAdornment?: React.ReactNode;
+  setLabelPosition: (pos: string) => void;
 };
 
 const defaultContext: InputContext = {
   status: undefined,
   required: false,
+  disabled: false,
   labelPosition: "top",
   endAdornment: undefined,
+  setLabelPosition: (pos: string) => {},
 };
 
 export const InputContext = createContext<InputContext>(defaultContext);
 
-const Label = ({ children }: { children: any }) => {
-  const { required, labelPosition } = React.useContext(InputContext);
+const BaseInput = ({
+  id,
+  // label,
+  // placeholder,
+  status,
+  // helperText,
+  disabled,
+  // value,
+  fullWidth,
+  // required,
+  // labelPosition,
+  // multiline,
+  // maxRows,
+  // minRows,
+  // startAdornment,
+  // endAdornment,
+  // onChange,
+  // type,
+  containerSx,
+  children,
+}: BaseInputProps) => {
+  const { labelPosition } = useContext(InputContext);
 
-  const renderRequiredIndicator = useCallback(() => {
-    if (!required) return null;
-    return (
-      <Typography
-        className="Input__required-indicator"
-        variant={FONT_VARIANT.fieldLabel}
-        color="danger.main"
-      >
-        *
-      </Typography>
-    );
-  }, [required]);
-
-  if (!children) return null;
-  return (
-    <Box
-      sx={{
-        ...(labelPosition === "left" && {
-          display: "flex",
-          alignItems: "center",
-        }),
-      }}
-    >
-      <Typography
-        className="Input__label"
-        variant={FONT_VARIANT.fieldLabel}
-        color="text.primary"
-      >
-        {children}
-      </Typography>
-      {renderRequiredIndicator()}
-    </Box>
-  );
-};
-
-const HelperText = ({ children }: { children: any }) => {
-  const { labelPosition } = React.useContext(InputContext);
-
-  if (!children) return null;
-  return (
-    <>
-      {/* render box here to push helper text into next column under the input */}
-      {labelPosition === "left" && <Box />}
-      <Typography
-        className="Input__helper-text"
-        variant={FONT_VARIANT.errorMessage}
-      >
-        {children}
-      </Typography>
-    </>
-  );
-};
-
-const BaseInput = (props: any) => {
-  const { id, status, labelPosition, required, fullWidth, containerSx } = props;
+  console.log("\n\n------------");
+  console.log("labelPosition:", labelPosition);
+  console.log("------------\n\n");
 
   const statusIcon = useMemo(() => {
     if (!status) return null;
@@ -170,55 +174,79 @@ const BaseInput = (props: any) => {
   }, [statusIcon]);
 
   return (
+    <StyledWrapper
+      id={id}
+      status={status}
+      disabled={disabled}
+      data-testid="Inputxxx"
+    >
+      <PlacementContainer
+        fullWidth={fullWidth}
+        className={cx("Input-container", {
+          ["Input-container--align-left"]: labelPosition === "left",
+        })}
+        sx={containerSx}
+      >
+        {typeof children === "function"
+          ? children({
+              endAdornment: renderStatusIcon(),
+              className: cx({
+                ["status--error"]: status === "error",
+                ["status--warning"]: status === "warning",
+                ["status--success"]: status === "success",
+              }),
+            })
+          : children}
+      </PlacementContainer>
+    </StyledWrapper>
+  );
+};
+
+const BaseInputProvider = ({
+  id,
+  status,
+  disabled,
+  fullWidth,
+  containerSx,
+  children,
+}: BaseInputProps) => {
+  const [labelPosition, setLabelPosition] = useState<"top" | "left">("top");
+
+  const handleSetLabelPosition = useCallback(
+    (pos: "top" | "left") => {
+      setLabelPosition(pos);
+    },
+    [setLabelPosition]
+  );
+
+  return (
     <InputContext.Provider
       value={{
         status,
-        required,
+        setLabelPosition: handleSetLabelPosition,
         labelPosition,
-        endAdornment: renderStatusIcon(),
+        disabled,
       }}
     >
-      <StyledWrapper id={id} status={status} data-testid="Input">
-        <Box
-          sx={{
-            width: fullWidth ? "100%" : "fit-content",
-            display: "flex",
-            flexDirection: "column",
-            ...(labelPosition === "left" && {
-              display: "grid",
-              gridTemplateColumns: "1fr",
-              gridTemplateRows: "1fr 1fr",
-              gap: "0px 8px",
-              gridTemplateAreas: `
-                ". ."
-                ". ."
-              `,
-            }),
-            ...containerSx,
-          }}
-        >
-          {typeof props?.children === "function"
-            ? props?.children({
-                endAdornment: renderStatusIcon(),
-                className: cx({
-                  ["status--error"]: status === "error",
-                  ["status--warning"]: status === "warning",
-                  ["status--success"]: status === "success",
-                }),
-              })
-            : props?.children}
-        </Box>
-      </StyledWrapper>
+      <BaseInput
+        id={id}
+        status={status}
+        fullWidth={fullWidth}
+        containerSx={containerSx}
+        disabled={disabled}
+      >
+        {children}
+      </BaseInput>
     </InputContext.Provider>
   );
 };
 
-BaseInput.defaultProps = {
+BaseInputProvider.defaultProps = {
   labelPosition: "top",
   multiline: false,
 };
 
-BaseInput.Label = Label;
-BaseInput.HelperText = HelperText;
+BaseInputProvider.Label = Label;
+BaseInputProvider.HelperText = HelperText;
 
-export default BaseInput;
+export default BaseInputProvider;

@@ -17,11 +17,11 @@ describe("Test Component", () => {
   const renderComponent = () => render(<Percent {...props} />);
 
   it("should render foo text correctly", () => {
-    props.foo = "harvey was here";
+    props.foo = "conner was here";
     const { getByTestId } = renderComponent();
 
     const component = getByTestId("Percent");
 
-    expect(component).toHaveTextContent("harvey was here");
+    expect(component).toHaveTextContent("conner was here");
   });
 });

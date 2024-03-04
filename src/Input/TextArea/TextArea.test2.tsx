@@ -1,6 +1,6 @@
 // Generated with util/create-component.js
-import React from "react";
 import { render } from "@testing-library/react";
+import React from "react";
 
 import TextArea from "./TextArea";
 import { TextAreaProps } from "./TextArea.types";
@@ -10,18 +10,18 @@ describe("Test Component", () => {
 
   beforeEach(() => {
     props = {
-      foo: "bar"
+      foo: "bar",
     };
   });
 
   const renderComponent = () => render(<TextArea {...props} />);
 
   it("should render foo text correctly", () => {
-    props.foo = "harvey was here";
+    props.foo = "conner was here";
     const { getByTestId } = renderComponent();
 
     const component = getByTestId("TextArea");
 
-    expect(component).toHaveTextContent("harvey was here");
+    expect(component).toHaveTextContent("conner was here");
   });
 });

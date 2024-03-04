@@ -11,6 +11,7 @@
   "scripts": {
     "build": "rollup -c",
     "test": "jest",
+    "test:update": "jest --updateSnapshot",
     "test:watch": "jest --watch",
     "generate": "node ./util/create-component",
     "sb": "start-storybook -p 6007",

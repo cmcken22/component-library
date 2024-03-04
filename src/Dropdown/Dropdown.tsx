@@ -1,5 +1,6 @@
 // Generated with util/create-component.js
 import { Box, FormControl, MenuItem, Select } from "@mui/material";
+import cx from "classnames";
 import React, { useCallback, useMemo, useState } from "react";
 import BaseInput from "../BaseInput";
 import Icon, { IconVariant } from "../Icon";
@@ -21,7 +22,7 @@ interface DropdownProps {
   value: string;
   fullWidth?: boolean;
   required?: boolean;
-  labelPosition?: "top" | "side";
+  labelPosition?: "top" | "left";
   onChange?: (value: string) => void;
   startAdornment: () => React.ReactNode;
   options: StandardDropdownOptions[] | any[];
@@ -48,6 +49,7 @@ const Dropdown = ({
   getOptionDisabled,
 }: DropdownProps) => {
   const [value, setValue] = useState(passedValue || "");
+  const [open, setOpen] = useState(false);
 
   const handleChange = useCallback(
     (e: any) => {
@@ -66,9 +68,6 @@ const Dropdown = ({
 
   const renderSelectedValue = useCallback(
     (value?: any, selectedValue?: any) => {
-      console.log("_value:", value);
-      console.log("_test:", !value && placeholder);
-
       if (!value && placeholder) {
         return (
           <Typography variant="bodyR" color="charcoal.light">
@@ -88,19 +87,19 @@ const Dropdown = ({
   );
 
   return (
-    <BaseInput
-      id={id}
-      required={required}
-      status={status}
-      labelPosition={labelPosition}
-      fullWidth={fullWidth}
-      disabled={disabled}
-    >
+    <BaseInput id={id} status={status}>
       {({ endAdornment }: any) => (
         <>
-          <BaseInput.Label>{label}</BaseInput.Label>
+          <BaseInput.Label required={required} position={labelPosition}>
+            {label}
+          </BaseInput.Label>
           <FormControl sx={{ minWidth: 120 }}>
             <Select
+              className={cx("dropdown", {
+                "dropdown--open": open,
+              })}
+              onOpen={() => setOpen(true)}
+              onClose={() => setOpen(false)}
               displayEmpty
               placeholder={placeholder}
               value={value}
@@ -136,6 +135,9 @@ const Dropdown = ({
                     height="20px"
                     width="20px"
                     color="charcoal.dark"
+                    sx={{
+                      top: "calc(50% - 10px) !important",
+                    }}
                   />
                 );
               }}
