@@ -1,7 +1,13 @@
 // Generated with util/create-component.js
 import { FormControl, MenuItem, Select } from "@mui/material";
 import cx from "classnames";
-import React, { useCallback, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useOnHover } from "src/Hooks";
 import BaseInput from "../BaseInput";
 import Typography from "../Typography";
@@ -14,24 +20,26 @@ interface StandardDropdownOption {
 }
 
 interface DropdownProps {
-  id: string;
-  label: string;
+  id?: string;
+  label?: string;
   placeholder?: string;
   open?: boolean;
   status?: "error" | "success" | "warning";
   helperText?: string;
   disabled?: boolean;
-  value: string;
+  value?: string;
   fullWidth?: boolean;
   required?: boolean;
   labelPosition?: "top" | "left";
-  onChange?: (value: string) => void;
-  startAdornment: () => React.ReactNode;
   options: StandardDropdownOption[] | any[];
+  onChange?: (value: string) => void;
+  startAdornment?: () => React.ReactNode;
   getOptionLabel?: (option: any) => string;
   getOptionValue?: (option: any) => string;
   getOptionDisabled?: (option: any) => boolean;
   onHover?: (hovered: boolean) => void;
+  defaultActiveFirstOption?: boolean;
+  minWidth?: number | string;
 }
 
 const Dropdown = ({
@@ -52,10 +60,13 @@ const Dropdown = ({
   getOptionValue,
   getOptionDisabled,
   onHover,
+  defaultActiveFirstOption,
+  minWidth,
 }: DropdownProps) => {
   const [value, setValue] = useState(passedValue || "");
   const [open, setOpen] = useState(defaultOpen || false);
   const onHoverMethods = useOnHover(onHover);
+  const alreadyCheckedFirstValue = useRef(false);
 
   const handleChange = useCallback(
     (e: any) => {
@@ -92,6 +103,24 @@ const Dropdown = ({
     [getOptionLabel, placeholder]
   );
 
+  const handleDefaultActiveFirstOption = useCallback(() => {
+    if (options.length === 0) return;
+    const firstOption = options[0];
+    const value = getOptionValue
+      ? getOptionValue(firstOption)
+      : firstOption.value;
+    handleChange({ target: { value } });
+  }, [options, getOptionValue, value, handleChange]);
+
+  useEffect(() => {
+    if (defaultActiveFirstOption && !value && options.length > 0) {
+      if (!alreadyCheckedFirstValue.current) {
+        alreadyCheckedFirstValue.current = true;
+        handleDefaultActiveFirstOption();
+      }
+    }
+  }, [options, defaultActiveFirstOption, handleDefaultActiveFirstOption]);
+
   return (
     <BaseInput id={id} status={status}>
       {({ endAdornment }: any) => (
@@ -99,12 +128,12 @@ const Dropdown = ({
           <BaseInput.Label required={required} position={labelPosition}>
             {label}
           </BaseInput.Label>
-          <FormControl sx={{ minWidth: 120 }}>
+          <FormControl sx={{ minWidth }}>
             <Select
               className={cx("dropdown", {
                 "dropdown--open": open,
               })}
-              {...{ onHoverMethods }}
+              {...onHoverMethods}
               onOpen={() => setOpen(true)}
               onClose={() => setOpen(false)}
               displayEmpty
@@ -144,6 +173,7 @@ const Dropdown = ({
 Dropdown.defaultProps = {
   labelPosition: "top",
   options: [],
+  minWidth: 120,
 };
 
 export default Dropdown;

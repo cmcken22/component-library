@@ -14,7 +14,6 @@ const Label = ({ children, required, position }: LabelProps) => {
   const { setLabelPosition } = useContext(InputContext);
 
   useEffect(() => {
-    console.log("position>>>:", position);
     if (position) setLabelPosition(position);
   }, [position, setLabelPosition]);
 
@@ -25,6 +24,7 @@ const Label = ({ children, required, position }: LabelProps) => {
         className="Input__required-indicator"
         variant={FONT_VARIANT.fieldLabel}
         color="danger.main"
+        preventTextSelection
       >
         *
       </Typography>
@@ -45,6 +45,7 @@ const Label = ({ children, required, position }: LabelProps) => {
         className="Input__label"
         variant={FONT_VARIANT.fieldLabel}
         color="text.primary"
+        preventTextSelection
       >
         {children}
       </Typography>

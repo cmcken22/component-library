@@ -19,6 +19,7 @@ const HelperText = ({ children }: HelperTextProps) => {
       <Typography
         className="Input__helper-text"
         variant={FONT_VARIANT.errorMessage}
+        preventTextSelection
       >
         {children}
       </Typography>

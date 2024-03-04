@@ -1,5 +1,6 @@
 // Generated with util/create-component.js
 import { Box } from "@mui/material";
+import { action } from "@storybook/addon-actions";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import Dropdown from "./Dropdown";
@@ -37,6 +38,8 @@ Primary.args = {
       yyy: "option2",
     },
   ],
+  onHover: (hovered: boolean) => action("onHover")(hovered),
+  onChange: (value: string) => action("onChange")(value),
 };
 
 Primary.argTypes = {

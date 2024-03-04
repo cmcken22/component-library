@@ -12,68 +12,71 @@ import HelperText from "./HelperText";
 import Label from "./Label";
 
 const StyledWrapper = styled(Box, {
-  shouldForwardProp: (prop) => prop !== "status",
+  shouldForwardProp: (prop) => prop !== "status" && prop !== "labelPosition",
   slot: "Root",
-})<{ status?: string; disabled?: boolean }>(({ theme, status, disabled }) => {
-  const colorMap = {
-    error: theme.palette.error.main,
-    warning: theme.palette.warning.main,
-    success: theme.palette.success.main,
-  };
+})<{ status?: string; disabled?: boolean; labelPosition?: string }>(
+  ({ theme, status, disabled, labelPosition }) => {
+    const colorMap = {
+      error: theme.palette.error.main,
+      warning: theme.palette.warning.main,
+      success: theme.palette.success.main,
+    };
 
-  let borderColor = colorMap?.[status]
-    ? `${colorMap?.[status]} !important`
-    : theme.palette.charcoal["20"];
-  if (disabled) borderColor = theme.palette.charcoal["20"];
+    let borderColor = colorMap?.[status]
+      ? `${colorMap?.[status]} !important`
+      : theme.palette.charcoal["20"];
+    if (disabled) borderColor = theme.palette.charcoal["20"];
 
-  return {
-    width: "fit-content",
-    display: "flex",
-    flexDirection: "column",
-    color: colorMap?.[status],
-    input: {
-      overflow: "hidden",
-      textOverflow: "ellipsis",
-      // "&:-internal-autofill-selected": {
+    return {
+      width: "fit-content",
+      display: "flex",
+      flexDirection: "column",
+      color: colorMap?.[status],
+      input: {
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        // "&:-internal-autofill-selected": {
+        //   backgroundColor: "red",
+        // },
+      },
+      // "input:-internal-autofill-selected": {
       //   backgroundColor: "red",
       // },
-    },
-    // "input:-internal-autofill-selected": {
-    //   backgroundColor: "red",
-    // },
-    ".MuiInputAdornment-positionEnd .icon-wrapper": {
-      color: colorMap?.[status],
-    },
-    ".Input": {
-      "&__label": {
-        marginBottom: theme.spacing(0.5),
+      ".MuiInputAdornment-positionEnd .icon-wrapper": {
+        color: colorMap?.[status],
       },
-      "&__helper-text": {
-        marginTop: theme.spacing(0.5),
-        lineHeight: "13.64px",
+      ".Input": {
+        "&__label": {
+          marginBottom: labelPosition === "top" ? theme.spacing(0.5) : 0,
+        },
+        "&__helper-text": {
+          marginTop: theme.spacing(0.5),
+          lineHeight: "13.64px",
+        },
+        "&__required-indicator": {
+          marginLeft: theme.spacing(0.25),
+          marginBottom: labelPosition === "top" ? theme.spacing(0.5) : 0,
+        },
       },
-      "&__required-indicator": {
-        marginLeft: theme.spacing(0.25),
+      "& .MuiInputBase-root:not(.Mui-disabled)": {
+        "& fieldset": {
+          borderColor: borderColor,
+        },
+        "&:hover fieldset": {
+          borderColor: !disabled ? theme.palette.primary.main : "",
+        },
       },
-    },
-    "& .MuiInputBase-root:not(.Mui-disabled)": {
-      "& fieldset": {
-        borderColor: borderColor,
+      "& .MuiInputBase-root.Mui-disabled": {
+        "& fieldset": {
+          borderColor: borderColor,
+        },
+        "&:hover fieldset": {
+          borderColor: theme.palette.charcoal["20"],
+        },
       },
-      "&:hover fieldset": {
-        borderColor: !disabled ? theme.palette.primary.main : "",
-      },
-    },
-    "& .MuiInputBase-root.Mui-disabled": {
-      "& fieldset": {
-        borderColor: borderColor,
-      },
-      "&:hover fieldset": {
-        borderColor: theme.palette.charcoal["20"],
-      },
-    },
-  };
-});
+    };
+  }
+);
 
 const PlacementContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== "fullWidth",
@@ -132,30 +135,13 @@ export const InputContext = createContext<InputContext>(defaultContext);
 
 const BaseInput = ({
   id,
-  // label,
-  // placeholder,
   status,
-  // helperText,
   disabled,
-  // value,
   fullWidth,
-  // required,
-  // labelPosition,
-  // multiline,
-  // maxRows,
-  // minRows,
-  // startAdornment,
-  // endAdornment,
-  // onChange,
-  // type,
   containerSx,
   children,
 }: BaseInputProps) => {
   const { labelPosition } = useContext(InputContext);
-
-  console.log("\n\n------------");
-  console.log("labelPosition:", labelPosition);
-  console.log("------------\n\n");
 
   const statusIcon = useMemo(() => {
     if (!status) return null;
@@ -178,7 +164,8 @@ const BaseInput = ({
       id={id}
       status={status}
       disabled={disabled}
-      data-testid="Inputxxx"
+      labelPosition={labelPosition}
+      data-testid="Input"
     >
       <PlacementContainer
         fullWidth={fullWidth}
