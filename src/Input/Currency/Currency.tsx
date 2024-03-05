@@ -1,12 +1,22 @@
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, TextField, styled } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import { NumericFormat } from "react-number-format";
 import BaseInput from "src/BaseInput";
 import Icon, { IconVariant } from "src/Icon";
 import { InputProps } from "../Input";
 
-// @ts-ignore
-export interface CurrencyInputProps extends InputProps {
+const StyledTextField = styled(TextField, {
+  slot: "root",
+})(({ theme }) => {
+  return {
+    "& input": {
+      textAlign: "right",
+    },
+  };
+});
+
+export interface CurrencyInputProps
+  extends Omit<InputProps, "type" | "maxChars" | "onChange"> {
   onChange?: (
     value: string,
     formattedValue: string,
@@ -26,6 +36,8 @@ const Currency = ({
   required,
   labelPosition = "top",
   onChange,
+  width,
+  minWidth,
 }: CurrencyInputProps) => {
   const [value, setValue] = useState(passedValue);
 
@@ -46,28 +58,25 @@ const Currency = ({
   }, []);
 
   return (
-    <BaseInput
-      id={id}
-      // required={required}
-      status={status}
-      labelPosition={labelPosition}
-    >
+    <BaseInput id={id} status={status}>
       {({ endAdornment }: any) => (
         <>
-          <BaseInput.Label>{label}</BaseInput.Label>
+          <BaseInput.Label required={required} position={labelPosition}>
+            {label}
+          </BaseInput.Label>
           <NumericFormat
             value={value}
             onValueChange={handleChange}
+            placeholder={placeholder}
             thousandSeparator={true}
             fixedDecimalScale={true}
             decimalScale={2}
-            customInput={TextField}
+            customInput={StyledTextField}
             fullWidth={fullWidth}
             disabled={disabled}
             sx={{
-              "& input": {
-                textAlign: "right",
-              },
+              width,
+              minWidth,
             }}
             InputProps={{
               startAdornment: startAdornment(),
@@ -79,6 +88,18 @@ const Currency = ({
       )}
     </BaseInput>
   );
+};
+
+Currency.defaultProps = {
+  labelPosition: "top",
+  thousandSeparator: true,
+  fixedDecimalScale: true,
+  decimalScale: 2,
+  customInput: TextField,
+  fullWidth: true,
+  disabled: false,
+  required: false,
+  minWidth: "240px",
 };
 
 export default Currency;

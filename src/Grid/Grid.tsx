@@ -90,11 +90,11 @@ const Grid = ({ gutter }: GridProps) => {
         <pre>{JSON.stringify(theme.breakpoints.values, null, 2)}</pre>
         <p>Current Breakpoint: {breakpoint}</p>
         <MuiGrid container spacing={2} px={gutter}>
-          <MuiGrid xs={6} md={8}>
-            <Item>xs=6 md=8</Item>
+          <MuiGrid xs={6} sm={7} md={8} lg={9} xl={11}>
+            <Item>xs=6 sm=7 md=8 lg=9 xl=11</Item>
           </MuiGrid>
-          <MuiGrid xs={6} md={4}>
-            <Item>xs=6 md=4</Item>
+          <MuiGrid xs={6} sm={5} md={4} lg={3} xl={1}>
+            <Item>xs=6 sm=5 md=4 lg=2 xl=1</Item>
           </MuiGrid>
           <MuiGrid xs={6} md={4}>
             <Item>xs=6 md=4</Item>

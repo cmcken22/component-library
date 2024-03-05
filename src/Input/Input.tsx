@@ -22,6 +22,8 @@ export interface InputProps extends BaseInputProps {
   type?: "text" | "password" | "number";
   debounce?: number;
   maxChars?: number;
+  width?: string | number;
+  minWidth?: string | number;
 }
 
 const Input = ({
@@ -39,6 +41,8 @@ const Input = ({
   onChange,
   debounce,
   maxChars,
+  width,
+  minWidth,
 }: InputProps) => {
   const [value, setValue] = useState(passedValue || "");
 
@@ -81,6 +85,10 @@ const Input = ({
             fullWidth={fullWidth}
             onChange={handleChange}
             InputProps={{ endAdornment }}
+            sx={{
+              width,
+              minWidth,
+            }}
           />
           <BaseInput.HelperText>{helperText}</BaseInput.HelperText>
         </>
@@ -93,6 +101,7 @@ Input.defaultProps = {
   labelPosition: "top",
   multiline: false,
   type: "text",
+  minWidth: "240px",
 };
 
 Input.Currency = Currency;

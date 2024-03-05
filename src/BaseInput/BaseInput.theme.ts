@@ -3,6 +3,10 @@ import { FONT_WEIGHT_VALUES } from "../theme/Typography";
 export default {
   styleOverrides: {
     root: ({ theme, ownerState }: any) => {
+      console.log("ownerState:", ownerState);
+      const startAdornment = ownerState?.InputProps?.startAdornment;
+      const endAdornment = ownerState?.InputProps?.endAdornment;
+
       return {
         "input::-webkit-outer-spin-button": {
           margin: 0,
@@ -30,6 +34,12 @@ export default {
           fontWeight: FONT_WEIGHT_VALUES.regular,
           paddingTop: theme.typography.pxToRem(6.5),
           paddingBottom: theme.typography.pxToRem(6.5),
+          paddingLeft: startAdornment
+            ? theme.typography.pxToRem(0)
+            : theme.typography.pxToRem(8),
+          paddingRight: endAdornment
+            ? theme.typography.pxToRem(0)
+            : theme.typography.pxToRem(8),
         },
         textarea: {
           paddingTop: theme.typography.pxToRem(8),

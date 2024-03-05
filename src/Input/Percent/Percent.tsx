@@ -1,12 +1,22 @@
-import { Box, InputAdornment, TextField } from "@mui/material";
+import { Box, InputAdornment, TextField, styled } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import { NumericFormat } from "react-number-format";
 import BaseInput from "src/BaseInput";
 import { InputProps } from "src/Input";
 import Typography from "src/Typography";
 
-// @ts-ignore
-export interface PercentInputProps extends InputProps {
+const StyledTextField = styled(TextField, {
+  slot: "root",
+})(({ theme }) => {
+  return {
+    "& input": {
+      textAlign: "left",
+    },
+  };
+});
+
+export interface PercentInputProps
+  extends Omit<InputProps, "type" | "maxChars" | "onChange"> {
   onChange?: (
     value: string,
     formattedValue: string,
@@ -32,6 +42,8 @@ const Percent = ({
   fixedDecimalScale,
   decimalScale,
   thousandSeparator,
+  width,
+  minWidth,
 }: PercentInputProps) => {
   const [value, setValue] = useState(passedValue);
 
@@ -46,7 +58,7 @@ const Percent = ({
 
   const percentAdornment = useCallback(() => {
     return (
-      <InputAdornment position="start" sx={{ ml: "8px" }}>
+      <InputAdornment position="end" sx={{ mr: 0 }}>
         <Box sx={{ width: "15px" }}>
           <Typography variant="bodyR" color="charcoal.90">
             %
@@ -66,16 +78,19 @@ const Percent = ({
           <NumericFormat
             value={value}
             onValueChange={handleChange}
+            placeholder={placeholder}
             thousandSeparator={thousandSeparator}
             fixedDecimalScale={fixedDecimalScale}
             decimalScale={decimalScale}
-            customInput={TextField}
+            customInput={StyledTextField}
             fullWidth={fullWidth}
             disabled={disabled}
             sx={{
-              "& input": {
-                textAlign: "left",
-              },
+              width,
+              minWidth,
+              // "& input": {
+              //   textAlign: "left",
+              // },
             }}
             InputProps={{
               endAdornment: endAdornment || percentAdornment(),
@@ -90,10 +105,12 @@ const Percent = ({
 
 Percent.defaultProps = {
   labelPosition: "top",
-  fixedDecimalScale: true,
-  decimalScale: 2,
+  fixedDecimalScale: false,
   thousandSeparator: false,
   disabled: false,
+  required: false,
+  width: "73px",
+  minWidth: "73px",
 };
 
 export default Percent;

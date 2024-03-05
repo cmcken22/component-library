@@ -1,9 +1,10 @@
 import { TextField } from "@mui/material";
 import _debounce from "lodash.debounce";
 import React, { useCallback, useState } from "react";
-import BaseInput, { BaseInputProps } from "src/BaseInput";
+import BaseInput from "src/BaseInput";
+import { InputProps } from "../Input";
 
-export interface TextAreaProps extends BaseInputProps {
+export interface TextAreaProps extends Omit<InputProps, "type"> {
   maxRows?: number;
   minRows?: number;
   onChange?: (value: string) => void;
@@ -29,7 +30,9 @@ const TextArea = ({
   debounce,
   maxChars,
   maxWords,
-}: any) => {
+  width,
+  minWidth,
+}: TextAreaProps) => {
   const [value, setValue] = useState(passedValue || "");
 
   const debounceOnChange = useCallback(
@@ -41,8 +44,6 @@ const TextArea = ({
 
   const handleChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      console.log("maxWords:", maxWords);
-      console.log("maxChars:", maxChars);
       if ((maxChars || maxChars === 0) && e.target.value.length > maxChars) {
         return;
       }
@@ -77,6 +78,10 @@ const TextArea = ({
             minRows={minRows}
             maxRows={maxRows}
             InputProps={{ endAdornment }}
+            sx={{
+              width,
+              minWidth,
+            }}
           />
           <BaseInput.HelperText>{helperText}</BaseInput.HelperText>
         </>
@@ -89,6 +94,7 @@ TextArea.defaultProps = {
   labelPosition: "top",
   minRows: 2,
   maxRows: 4,
+  minWidth: "240px",
 };
 
 export default TextArea;
